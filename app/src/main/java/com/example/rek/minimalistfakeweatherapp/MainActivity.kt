@@ -3,6 +3,7 @@ package com.example.rek.minimalistfakeweatherapp
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.rek.minimalistfakeweatherapp.fragments.WeatherFragment
+import com.example.rek.minimalistfakeweatherapp.utils.MainViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

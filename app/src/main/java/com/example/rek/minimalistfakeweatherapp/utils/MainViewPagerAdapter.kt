@@ -1,4 +1,4 @@
-package com.example.rek.minimalistfakeweatherapp
+package com.example.rek.minimalistfakeweatherapp.utils
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

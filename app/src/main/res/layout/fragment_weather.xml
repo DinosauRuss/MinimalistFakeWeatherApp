@@ -1,16 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/holo_orange_dark"
     tools:context=".fragments.WeatherFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        />
+        android:id="@+id/tvCityName"
+        style="@style/CityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Philadelphia, PA" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/imgCityWeather"
+        style="@style/imgWeatherIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCityName"
+        tools:src="@drawable/weather_cloud_temp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgCityWeather">
+
+        <TextView
+            android:id="@+id/tvCityTemp"
+            style="@style/CityTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            tools:text="65\u00B0" />
+
+        <TextView
+            android:id="@+id/tvDegreeSymbol"
+            style="@style/CityTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/degree_symbol_size"
+            tools:text="@string/farenheight" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.example.rek.minimalistfakeweatherapp.views.FutureWeatherView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/futureViewPlusOne"
+            android:paddingTop="@dimen/future_view_paddingTop"
+            android:paddingBottom="@dimen/future_view_paddingBottom"/>
+
+        <com.example.rek.minimalistfakeweatherapp.views.FutureWeatherView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/futureViewPlusTwo"
+            android:paddingTop="@dimen/future_view_paddingTop"
+            android:paddingBottom="@dimen/future_view_paddingBottom"/>
+
+        <com.example.rek.minimalistfakeweatherapp.views.FutureWeatherView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/futureViewPlusThree"
+            android:paddingTop="@dimen/future_view_paddingTop"
+            android:paddingBottom="@dimen/future_view_paddingBottom"/>
+
+        <com.example.rek.minimalistfakeweatherapp.views.FutureWeatherView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/futureViewPlusFour"
+            android:paddingTop="@dimen/future_view_paddingTop"
+            android:paddingBottom="@dimen/future_view_paddingBottom"/>
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
+
+
