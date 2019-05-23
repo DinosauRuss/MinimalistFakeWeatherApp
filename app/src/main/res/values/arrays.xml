@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="WeatherIcons">
+        <item>@drawable/weather_sun_temp</item>
+        <item>@drawable/weather_cloud_temp</item>
+        <item>@drawable/weather_part_sun_temp</item>
+        <item>@drawable/weather_rain_temp</item>
+    </integer-array>
+
+</resources>

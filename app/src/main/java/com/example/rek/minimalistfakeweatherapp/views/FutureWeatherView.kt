@@ -16,23 +16,12 @@ class FutureWeatherView : LinearLayoutCompat {
 
     constructor(context: Context): super(context)
     constructor(context: Context, attrs: AttributeSet): super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int): super(context, attrs, defStyleAttr)
 
     init {
         orientation = LinearLayout.VERTICAL
 
         val inflato: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflato.inflate(R.layout.future_weather, this, true)
-
-        // Temporary data
-        tvFutureDay.text = "FRI"
-        imgFutureWeatherIcon.setImageDrawable( ContextCompat.getDrawable(context,
-            R.drawable.weather_rain_temp
-        ) )
-        val tempText = "75\u00B0 / 35\u00B0"
-        tvFutureTemps.text = tempText
-
-        Log.d(Utils.TAG, "init")
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

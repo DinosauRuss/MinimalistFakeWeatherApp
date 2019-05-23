@@ -1,47 +1,49 @@
 package com.example.rek.minimalistfakeweatherapp.fragments
 
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.rek.minimalistfakeweatherapp.CityWeatherEntity
 
 import com.example.rek.minimalistfakeweatherapp.R
+import com.example.rek.minimalistfakeweatherapp.utils.WeatherViewModel
+import kotlinx.android.synthetic.main.fragment_weather.*
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val CITY_POS = "city_pos"
 
 class WeatherFragment : Fragment() {
+
+    private var name: String? = "Random, CA"
+    private var pos: Int = 0
+
+    private lateinit var dataEntity: CityWeatherEntity
 
     companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
+         * @param location Location to display fake weather data
+         * @param unitF F or C
          * @return A new instance of fragment WeatherFragment.
          */
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(pos: Int) =
             WeatherFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putInt(CITY_POS, pos)
                 }
             }
     }
 
-
-    private var param1: String? = null
-    private var param2: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            pos = it.getInt(CITY_POS)
         }
     }
 
@@ -51,6 +53,17 @@ class WeatherFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_weather, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val vModel = ViewModelProviders.of(activity!!).get(WeatherViewModel::class.java)
+
+
+        // TODO set symbol from sharedPref
+        tvDegreeSymbol.text = getString(R.string.farenheight)
+
+        tvCityName.text = vModel.citiesTempArray[pos]._name
     }
 
 }

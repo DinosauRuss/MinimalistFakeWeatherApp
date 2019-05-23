@@ -3,8 +3,8 @@
     
     <string name="hello_blank_fragment">Hello blank fragment</string>
     
-    <string name="farenheight">F</string>
-    <string name="celsius">C</string>
+    <string name="farenheight" translatable="false">F</string>
+    <string name="celsius" translatable="false">C</string>
 
 </resources>
 
