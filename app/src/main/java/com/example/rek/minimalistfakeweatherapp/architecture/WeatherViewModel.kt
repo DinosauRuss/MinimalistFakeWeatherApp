@@ -3,18 +3,25 @@ package com.example.rek.minimalistfakeweatherapp.architecture
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.os.AsyncTask
-import android.support.v4.app.Fragment
-import android.util.Log
-import com.example.rek.minimalistfakeweatherapp.CityWeatherEntity
+import com.example.rek.minimalistfakeweatherapp.FakeDataEntity
 
 class WeatherViewModel(application: Application): AndroidViewModel(application) {
 
-    val localEntitiesArray = ArrayList<CityWeatherEntity>()
+    val observableFakeDataEntities = MutableLiveData<ArrayList<FakeDataEntity>>()
+    private val localEntitiesArray = ArrayList<FakeDataEntity>()
 
-    fun addCityEntity(entity: CityWeatherEntity) {
+    fun addDataEntity(entity: FakeDataEntity) {
         localEntitiesArray.add(entity)
+        observableFakeDataEntities.value = localEntitiesArray
     }
+
+    fun popEntity() {
+        localEntitiesArray.removeAt(localEntitiesArray.size - 1)
+        observableFakeDataEntities.value = localEntitiesArray
+    }
+
+//    fun getFakeDataEntity(position: Int): FakeDataEntity {
+//        return localEntitiesArray[position]
+//    }
 }
 

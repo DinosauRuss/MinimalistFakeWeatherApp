@@ -1,5 +1,6 @@
 package com.example.rek.minimalistfakeweatherapp
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -16,17 +17,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        vModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
-
         vpAdapter = MainViewPagerAdapter(supportFragmentManager)
         viewPagerMain.adapter = vpAdapter
 
-        addCity("St. Louis")
-        addCity("Anaheim")
-        addCity("Michigan")
-        addCity("Seattle, WA")
-        addCity("Miami, Fl")
-        addCity("Denver, CO")
+        vModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
+        vModel.observableFakeDataEntities.observe(this, Observer {
+            if (it != null) vpAdapter.dataSetChanged(it)
+        })
+
+        fab.setOnClickListener {
+//            if (viewPagerMain.currentItem == vpAdapter.count-1) viewPagerMain.currentItem =0
+            vModel.popEntity()
+        }
+
+        // Only add sample data on first run
+        if (savedInstanceState == null) {
+            addCity("St. Louis")
+            addCity("Anaheim")
+            addCity("Michigan")
+            addCity("Seattle, WA")
+            addCity("Miami, Fl")
+            addCity("Denver, CO")
+        }
     }
 
     override fun onBackPressed() {
@@ -39,9 +51,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addCity(name: String) {
-        vpAdapter.addFragment()
-
-        val entity = CityWeatherEntity(name)
-        vModel.addCityEntity(entity)
+        val newEntity = FakeDataEntity(name)
+        vModel.addDataEntity(newEntity)
     }
 }
