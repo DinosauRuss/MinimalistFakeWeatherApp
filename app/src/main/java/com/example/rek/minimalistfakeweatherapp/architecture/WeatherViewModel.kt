@@ -20,8 +20,5 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
         observableFakeDataEntities.value = localEntitiesArray
     }
 
-//    fun getFakeDataEntity(position: Int): FakeDataEntity {
-//        return localEntitiesArray[position]
-//    }
 }
 

@@ -4,8 +4,14 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.utils.MainViewPagerAdapter
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
+import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        initLayout()
 
         vpAdapter = MainViewPagerAdapter(supportFragmentManager)
         viewPagerMain.adapter = vpAdapter
@@ -25,12 +31,7 @@ class MainActivity : AppCompatActivity() {
             if (it != null) vpAdapter.dataSetChanged(it)
         })
 
-        fab.setOnClickListener {
-//            if (viewPagerMain.currentItem == vpAdapter.count-1) viewPagerMain.currentItem =0
-            vModel.popEntity()
-        }
-
-        // Only add sample data on first run
+        // Load sample data on first run
         if (savedInstanceState == null) {
             addCity("St. Louis")
             addCity("Anaheim")
@@ -39,6 +40,31 @@ class MainActivity : AppCompatActivity() {
             addCity("Miami, Fl")
             addCity("Denver, CO")
         }
+    }
+
+    private fun initLayout() {
+        setContentView(R.layout.activity_main)
+
+        setSupportActionBar(mainToolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menuCities -> Log.d(Utils.TAG, "cities")
+            R.id.menuAdd -> Log.d(Utils.TAG, "add")
+            R.id.menuSettings -> Log.d(Utils.TAG, "settings")
+            else -> {
+                Toast.makeText(this, resources.getString(R.string.oops), Toast.LENGTH_SHORT).show()
+            }
+        }
+        return true
     }
 
     override fun onBackPressed() {
