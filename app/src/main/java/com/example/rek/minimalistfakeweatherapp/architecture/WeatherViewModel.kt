@@ -11,8 +11,7 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
 
     private val repo = FakeDataRepository.INSTANCE
 
-    val observableFakeDataEntities = MutableLiveData<ArrayList<FakeDataEntity>>()
-//    private val localEntitiesArray = ArrayList<FakeDataEntity>()
+//    val observableFakeDataEntities = MutableLiveData<ArrayList<FakeDataEntity>>()
 
     fun addDataEntity(entity: FakeDataEntity) {
         repo.addDataEntity(entity)
@@ -22,17 +21,9 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
         repo.popEntity()
     }
 
-    fun observeFakeData(): LiveData<ArrayList<FakeDataEntity>> {
+    fun getFakeData(): LiveData<ArrayList<FakeDataEntity>> {
         return repo.getObservableFakeData()
     }
 
-
-
-
-
-    override fun onCleared() {
-        Log.d(Utils.TAG, "viewModel cleared")
-        super.onCleared()
-    }
 }
 

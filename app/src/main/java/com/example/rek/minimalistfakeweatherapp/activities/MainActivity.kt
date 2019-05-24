@@ -13,6 +13,7 @@ import com.example.rek.minimalistfakeweatherapp.architecture.FakeDataEntity
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.utils.MainViewPagerAdapter
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
+import com.example.rek.minimalistfakeweatherapp.utils.CityListRecyclerAdapter
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -29,11 +30,9 @@ class MainActivity : AppCompatActivity() {
         viewPagerMain.adapter = vpAdapter
 
         vModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
-//        vModel.observableFakeDataEntities.observe(this, Observer {
-//            if (it != null) vpAdapter.dataSetChanged(it)
-//        })
-        vModel.observeFakeData().observe(this, Observer {
+        vModel.getFakeData().observe(this, Observer {
             if (it != null) vpAdapter.dataSetChanged(it)
+            Log.d(Utils.TAG, it?.size.toString())
         })
 
         // Load sample data on first run
@@ -43,7 +42,17 @@ class MainActivity : AppCompatActivity() {
             addCity("Michigan")
             addCity("Seattle, WA")
             addCity("Miami, Fl")
-            addCity("Denver, CO")
+//            addCity("Denver, CO")
+//            addCity("Houston, TX")
+//            addCity("Washington, DC")
+//            addCity("Sioux Falls, ND")
+//            addCity("Birmingham, AL")
+//            addCity("Boston, MA")
+//            addCity("Wilmington, DE")
+//            addCity("Chicago, IL")
+//            addCity("Wyoming")
+//            addCity("Idaho")
+//            addCity("Australia")
         }
     }
 
