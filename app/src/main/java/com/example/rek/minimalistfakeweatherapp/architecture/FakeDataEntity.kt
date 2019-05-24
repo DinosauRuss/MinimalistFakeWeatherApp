@@ -1,4 +1,4 @@
-package com.example.rek.minimalistfakeweatherapp
+package com.example.rek.minimalistfakeweatherapp.architecture
 
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import java.io.Serializable

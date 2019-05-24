@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.rek.minimalistfakeweatherapp.FakeDataEntity
+import com.example.rek.minimalistfakeweatherapp.architecture.FakeDataEntity
 
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.views.FutureWeatherView

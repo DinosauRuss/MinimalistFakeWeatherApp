@@ -1,14 +1,16 @@
-package com.example.rek.minimalistfakeweatherapp
+package com.example.rek.minimalistfakeweatherapp.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.rek.minimalistfakeweatherapp.architecture.FakeDataEntity
+import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.utils.MainViewPagerAdapter
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
@@ -27,7 +29,10 @@ class MainActivity : AppCompatActivity() {
         viewPagerMain.adapter = vpAdapter
 
         vModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
-        vModel.observableFakeDataEntities.observe(this, Observer {
+//        vModel.observableFakeDataEntities.observe(this, Observer {
+//            if (it != null) vpAdapter.dataSetChanged(it)
+//        })
+        vModel.observeFakeData().observe(this, Observer {
             if (it != null) vpAdapter.dataSetChanged(it)
         })
 
@@ -51,13 +56,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.menuCities -> Log.d(Utils.TAG, "cities")
+            R.id.menuCities -> {
+                val intento = Intent(this, CitiesListActivity::class.java)
+                startActivity(intento)
+            }
             R.id.menuAdd -> Log.d(Utils.TAG, "add")
             R.id.menuSettings -> Log.d(Utils.TAG, "settings")
             else -> {
