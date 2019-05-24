@@ -11,7 +11,7 @@ import android.widget.TextView
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.architecture.FakeDataEntity
 
-class CityListRecyclerAdapter(val context: Context): RecyclerView.Adapter<CityListRecyclerAdapter.ViewHolder>() {
+class CityListRecyclerAdapter(val context: Context, val listener: ItemPressListener): RecyclerView.Adapter<CityListRecyclerAdapter.ViewHolder>() {
 
     private var data = ArrayList<FakeDataEntity>()
 
@@ -27,7 +27,7 @@ class CityListRecyclerAdapter(val context: Context): RecyclerView.Adapter<CityLi
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.setViewData(data[position])
+        viewHolder.setViewData(data[position], position, listener)
     }
 
 
@@ -36,13 +36,13 @@ class CityListRecyclerAdapter(val context: Context): RecyclerView.Adapter<CityLi
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
+    inner class ViewHolder(private val v: View): RecyclerView.ViewHolder(v) {
 
         private val tvName: TextView = v.findViewById(R.id.tvItemName)
         private val tvTemp: TextView = v.findViewById(R.id.tvItemTemp)
         private val imgIcon: ImageView = v.findViewById(R.id.imgItemIcon)
 
-        fun setViewData(entity: FakeDataEntity) {
+        fun setViewData(entity: FakeDataEntity, position: Int, listener: ItemPressListener) {
             tvName.text = entity.name
 
             val temp = "${entity.temp}\u00B0"
@@ -51,6 +51,19 @@ class CityListRecyclerAdapter(val context: Context): RecyclerView.Adapter<CityLi
             val imgs = context.resources.obtainTypedArray(R.array.WeatherIcons)
             imgIcon.setImageResource( imgs.getResourceId(entity.weatherIconIndex, 0) )
             imgs.recycle()
+
+            v.setOnLongClickListener {
+                listener.onItemLongPress(position)
+                return@setOnLongClickListener true
+            }
         }
+
+    }
+
+    /*
+    Provides a handle to the activity for modifying data
+     */
+    interface ItemPressListener {
+        fun onItemLongPress(position: Int)
     }
 }

@@ -22,6 +22,10 @@ class FakeDataRepository {
         observableFakeDataEntities.value = localEntitiesArray
     }
 
+    fun getSingleEntity(position: Int): FakeDataEntity {
+        return localEntitiesArray[position]
+    }
+
     fun popEntity() {
         localEntitiesArray.removeAt(localEntitiesArray.size - 1)
         observableFakeDataEntities.value = localEntitiesArray

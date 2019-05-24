@@ -17,6 +17,10 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
         repo.addDataEntity(entity)
     }
 
+    fun getSingleEntity(position: Int): FakeDataEntity {
+        return repo.getSingleEntity(position)
+    }
+
     fun popEntity() {
         repo.popEntity()
     }

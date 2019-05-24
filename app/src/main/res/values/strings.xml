@@ -8,6 +8,7 @@
     <string name="cities">cities</string>
     <string name="add">add</string>
     <string name="settings">settings</string>
+    <string name="city_deleted">%s has been deleted</string>
 
 </resources>
 

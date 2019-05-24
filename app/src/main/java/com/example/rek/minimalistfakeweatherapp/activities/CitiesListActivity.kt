@@ -8,20 +8,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.CityListRecyclerAdapter
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_cities_list.*
 
-class CitiesListActivity : AppCompatActivity() {
+class CitiesListActivity : AppCompatActivity(), CityListRecyclerAdapter.ItemPressListener {
 
     private lateinit var vModel: WeatherViewModel
     private lateinit var rvAdapter: CityListRecyclerAdapter
-
-//    init {
-////        vModel = ViewModelProviders.of(MainActivity.class).get(WeatherViewModel::class.java)
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +30,7 @@ class CitiesListActivity : AppCompatActivity() {
 
         initRecyclerView()
 
-        val vModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
+        vModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
         vModel.getFakeData().observe(this, Observer {
             if (it != null ) rvAdapter.setData(it)
         })
@@ -54,7 +51,15 @@ class CitiesListActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         rvCityList.layoutManager = LinearLayoutManager(this)
-        rvAdapter = CityListRecyclerAdapter(this)
+        rvAdapter = CityListRecyclerAdapter(this, this)
         rvCityList.adapter = rvAdapter
+    }
+
+    override fun onItemLongPress(position: Int) {
+        val name = vModel.getSingleEntity(position).name
+        val msg = resources.getString(R.string.city_deleted).format(name)
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+
+        vModel.popEntity()
     }
 }
