@@ -6,6 +6,8 @@ class Utils {
 
     companion object {
         const val TAG = "something"
+
+        const val numOfIcons = 4
         const val minTemp = 20
         const val maxTemp = 100
 
