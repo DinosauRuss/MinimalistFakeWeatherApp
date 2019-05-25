@@ -4,12 +4,12 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
-import com.example.rek.minimalistfakeweatherapp.architecture.FakeDataEntity
+import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeData
 import com.example.rek.minimalistfakeweatherapp.fragments.WeatherFragment
 
-class MainViewPagerAdapter(manager: FragmentManager): FragmentStatePagerAdapter(manager) {
+class AdapterViewPagerMain(manager: FragmentManager): FragmentStatePagerAdapter(manager) {
 
-    private var adapterFakeDataEntities = ArrayList<FakeDataEntity>()
+    private var adapterFakeDataEntities = ArrayList<EntityFakeData>()
 
     override fun getItem(position: Int): Fragment {
         return WeatherFragment.newInstance(adapterFakeDataEntities[position])
@@ -30,7 +30,7 @@ class MainViewPagerAdapter(manager: FragmentManager): FragmentStatePagerAdapter(
         }
     }
 
-    fun dataSetChanged(newDataList: ArrayList<FakeDataEntity>) {
+    fun dataSetChanged(newDataList: ArrayList<EntityFakeData>) {
         adapterFakeDataEntities = newDataList
         notifyDataSetChanged()
     }

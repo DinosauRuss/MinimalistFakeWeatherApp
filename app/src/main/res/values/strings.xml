@@ -9,6 +9,10 @@
     <string name="add">add</string>
     <string name="settings">settings</string>
     <string name="city_deleted">%s has been deleted</string>
+    <string name="city_remove_title">Delete City?</string>
+    <string name="city_remove_question">Delete %s?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
 

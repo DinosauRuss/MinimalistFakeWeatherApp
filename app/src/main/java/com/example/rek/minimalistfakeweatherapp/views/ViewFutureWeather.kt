@@ -12,7 +12,7 @@ import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.future_weather.view.*
 
-class FutureWeatherView : LinearLayoutCompat {
+class ViewFutureWeather : LinearLayoutCompat {
 
     constructor(context: Context): super(context)
     constructor(context: Context, attrs: AttributeSet): super(context, attrs)

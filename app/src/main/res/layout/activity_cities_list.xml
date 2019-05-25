@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBgDefault"
-    tools:context=".activities.CitiesListActivity">
+    tools:context=".activities.CitiesListActivity"
+    android:padding="12dp">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/listToolbar"

@@ -9,27 +9,26 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.example.rek.minimalistfakeweatherapp.architecture.FakeDataEntity
+import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeData
 import com.example.rek.minimalistfakeweatherapp.R
-import com.example.rek.minimalistfakeweatherapp.utils.MainViewPagerAdapter
-import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
-import com.example.rek.minimalistfakeweatherapp.utils.CityListRecyclerAdapter
+import com.example.rek.minimalistfakeweatherapp.utils.AdapterViewPagerMain
+import com.example.rek.minimalistfakeweatherapp.architecture.ViewModelWeather
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var vpAdapter: MainViewPagerAdapter
-    private lateinit var vModel: WeatherViewModel
+    private lateinit var vpAdapter: AdapterViewPagerMain
+    private lateinit var vModel: ViewModelWeather
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initLayout()
 
-        vpAdapter = MainViewPagerAdapter(supportFragmentManager)
+        vpAdapter = AdapterViewPagerMain(supportFragmentManager)
         viewPagerMain.adapter = vpAdapter
 
-        vModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
+        vModel = ViewModelProviders.of(this).get(ViewModelWeather::class.java)
         vModel.getFakeData().observe(this, Observer {
             if (it != null) vpAdapter.dataSetChanged(it)
             Log.d(Utils.TAG, it?.size.toString())
@@ -94,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addCity(name: String) {
-        val newEntity = FakeDataEntity(name)
+        val newEntity = EntityFakeData(name)
         vModel.addDataEntity(newEntity)
     }
 }

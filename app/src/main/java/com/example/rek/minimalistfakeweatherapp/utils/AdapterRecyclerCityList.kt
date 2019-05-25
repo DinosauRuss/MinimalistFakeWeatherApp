@@ -2,18 +2,17 @@ package com.example.rek.minimalistfakeweatherapp.utils
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.rek.minimalistfakeweatherapp.R
-import com.example.rek.minimalistfakeweatherapp.architecture.FakeDataEntity
+import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeData
 
-class CityListRecyclerAdapter(val context: Context, val listener: ItemPressListener): RecyclerView.Adapter<CityListRecyclerAdapter.ViewHolder>() {
+class AdapterRecyclerCityList(val context: Context, val listener: ItemPressListener): RecyclerView.Adapter<AdapterRecyclerCityList.ViewHolder>() {
 
-    private var data = ArrayList<FakeDataEntity>()
+    private var data = ArrayList<EntityFakeData>()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): ViewHolder {
         val inflato = LayoutInflater.from(context)
@@ -31,7 +30,7 @@ class CityListRecyclerAdapter(val context: Context, val listener: ItemPressListe
     }
 
 
-    fun setData(newData: ArrayList<FakeDataEntity>) {
+    fun setData(newData: ArrayList<EntityFakeData>) {
         data = newData
         notifyDataSetChanged()
     }
@@ -42,7 +41,7 @@ class CityListRecyclerAdapter(val context: Context, val listener: ItemPressListe
         private val tvTemp: TextView = v.findViewById(R.id.tvItemTemp)
         private val imgIcon: ImageView = v.findViewById(R.id.imgItemIcon)
 
-        fun setViewData(entity: FakeDataEntity, position: Int, listener: ItemPressListener) {
+        fun setViewData(entity: EntityFakeData, position: Int, listener: ItemPressListener) {
             tvName.text = entity.name
 
             val temp = "${entity.temp}\u00B0"

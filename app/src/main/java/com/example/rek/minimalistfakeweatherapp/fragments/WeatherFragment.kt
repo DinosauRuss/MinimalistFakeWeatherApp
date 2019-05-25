@@ -5,54 +5,28 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.rek.minimalistfakeweatherapp.architecture.FakeDataEntity
+import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeData
 
 import com.example.rek.minimalistfakeweatherapp.R
-import com.example.rek.minimalistfakeweatherapp.views.FutureWeatherView
+import com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_weather.*
 import kotlinx.android.synthetic.main.future_weather.view.*
-
-private const val NAME = "name"
-private const val TEMP = "temp"
-private const val ICON_INDEX = "icon_index"
-private const val FUTURE_ONE = "future_one"
-private const val FUTURE_TWO = "future_two"
-private const val FUTURE_THREE = "future_three"
-private const val FUTURE_FOUR = "future_four"
-
 
 class WeatherFragment : Fragment() {
 
     companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param pos Fragment position in the adapter data
-//         * @return A new instance of fragment WeatherFragment.
-//         */
-//        @JvmStatic
-//        fun newInstance(position: Int) =
-//            WeatherFragment().apply {
-//                arguments = Bundle().apply {
-//                    putInt(CITY_POS, position)
-//                }
-//            }
+        private const val JSON_ENTITY = "json_entity"
 
         // Method for creating new instances of the fragment
-        fun newInstance(entity: FakeDataEntity): WeatherFragment {
+        fun newInstance(entity: EntityFakeData): WeatherFragment {
+            // Store the fake weather data in a Bundle object
 
-            // Store the movie data in a Bundle object
             val args = Bundle()
-            args.putString(NAME, entity.name)
-            args.putInt(TEMP, entity.temp)
-            args.putInt(ICON_INDEX, entity.weatherIconIndex)
-            args.putIntegerArrayList(FUTURE_ONE, entity.futureDayOne)
-            args.putIntegerArrayList(FUTURE_TWO, entity.futureDayTwo)
-            args.putIntegerArrayList(FUTURE_THREE, entity.futureDayThree)
-            args.putIntegerArrayList(FUTURE_FOUR, entity.futureDayFour)
+            val jsonEntity = Gson().toJson(entity)
+            args.putString(JSON_ENTITY, jsonEntity)
 
-            // Create a new MovieFragment and set the Bundle as the arguments
+            // Create a new WeatherFragment and set the Bundle as the arguments
             // to be retrieved and displayed when the view is created
             val fragment = WeatherFragment()
             fragment.arguments = args
@@ -86,41 +60,33 @@ class WeatherFragment : Fragment() {
         // Retrieve and display the fake weather data from the Bundle
         val args = arguments
         if (args != null) {
-            // Primary day data
-            tvCityName.text = args.getString(NAME)
-            val temp = "${args.getInt(TEMP, -1)}\u00B0"
-            tvCityTemp.text = temp
-            val iconIndex = args.getInt(ICON_INDEX, -1)
+            val jsonEntity = Gson().fromJson<EntityFakeData>(args.getString(JSON_ENTITY), EntityFakeData::class.java)
             val imgs = resources.obtainTypedArray(R.array.WeatherIcons)
-            imgCityWeather.setImageResource(imgs.getResourceId(iconIndex, -1))
+
+            // Primary day data
+            tvCityName.text = jsonEntity.name
+            val temp = "${jsonEntity.temp}\u00B0"
+            tvCityTemp.text = temp
+            imgCityWeather.setImageResource(imgs.getResourceId(jsonEntity.weatherIconIndex, -1))
             imgs.recycle()
 
-            // Future Days data
-            val futureOne = args.getIntegerArrayList(FUTURE_ONE) ?: arrayListOf(-1, -1, -1)
-            setFutureData(futureOne, futureViewPlusOne)
-            val futureTwo = args.getIntegerArrayList(FUTURE_TWO) ?: arrayListOf(-1, -1, -1)
-            setFutureData(futureTwo, futureViewPlusTwo)
-            val futureThree = args.getIntegerArrayList(FUTURE_THREE) ?: arrayListOf(-1, -1, -1)
-            setFutureData(futureThree, futureViewPlusThree)
-            val futureFour = args.getIntegerArrayList(FUTURE_FOUR) ?: arrayListOf(-1, -1, -1)
-            setFutureData(futureFour, futureViewPlusFour)
+            // Future Days
+            bindFutureData(futureViewPlusOne, jsonEntity.futureDayOne)
+            bindFutureData(futureViewPlusTwo, jsonEntity.futureDayTwo)
+            bindFutureData(futureViewPlusThree, jsonEntity.futureDayThree)
+            bindFutureData(futureViewPlusFour, jsonEntity.futureDayFour)
         }
     }
 
-    private fun setFutureData(list: ArrayList<Int>, futureView: FutureWeatherView) {
+    private fun bindFutureData(view: ViewFutureWeather, day: EntityFakeData.FutureDayWeather) {
         val imgs = resources.obtainTypedArray(R.array.WeatherIcons)
 
-        val iconOne = list[0]
-        val tempHi = list[1]
-        val tempLo = list[2]
-        val hiLo = "$tempHi/$tempLo"
-
-        futureView.tvFutureDay.text = "NULL"
-        futureView.imgFutureWeatherIcon.setImageResource(imgs.getResourceId(iconOne, -1))
-        futureView.tvFutureTemps.text = hiLo
+        view.tvFutureDay.text = "NULL"
+        view.imgFutureWeatherIcon.setImageResource( imgs.getResourceId(day.iconIndex, -1) )
+        val futureTemps = "${day.tempHi}/${day.tempLo}"
+        view.tvFutureTemps.text = futureTemps
 
         imgs.recycle()
     }
-
 
 }

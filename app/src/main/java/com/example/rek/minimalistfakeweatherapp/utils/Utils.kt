@@ -11,6 +11,10 @@ class Utils {
         const val minTemp = 20
         const val maxTemp = 100
 
+        fun constrain(num:Int, min:Int=0, max:Int=110): Int {
+            return Math.max( (Math.min(num, max)), min )
+        }
+
         fun dpToPx(dp: Int): Int {
             return (dp * Resources.getSystem().displayMetrics.density).toInt()
         }
