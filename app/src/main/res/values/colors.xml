@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="colorBgDefault">@android:color/darker_gray</color>
+    <color name="white">@android:color/white</color>
+
 </resources>

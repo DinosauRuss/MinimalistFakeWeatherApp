@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeData
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterViewPagerMain
@@ -18,20 +17,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var vpAdapter: AdapterViewPagerMain
     private lateinit var vModel: ViewModelWeather
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initLayout()
 
-        vpAdapter = AdapterViewPagerMain(supportFragmentManager)
+        val vpAdapter = AdapterViewPagerMain(supportFragmentManager)
         viewPagerMain.adapter = vpAdapter
 
         vModel = ViewModelProviders.of(this).get(ViewModelWeather::class.java)
         vModel.getFakeData().observe(this, Observer {
             if (it != null) vpAdapter.dataSetChanged(it)
-            Log.d(Utils.TAG, it?.size.toString())
         })
 
         // Load sample data on first run
@@ -76,9 +73,6 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menuAdd -> Log.d(Utils.TAG, "add")
             R.id.menuSettings -> Log.d(Utils.TAG, "settings")
-            else -> {
-                Toast.makeText(this, resources.getString(R.string.oops), Toast.LENGTH_SHORT).show()
-            }
         }
         return true
     }

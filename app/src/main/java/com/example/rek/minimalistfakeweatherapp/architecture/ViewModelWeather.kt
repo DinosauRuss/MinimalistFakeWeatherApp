@@ -8,8 +8,6 @@ class ViewModelWeather(application: Application): AndroidViewModel(application) 
 
     private val repo = RepositoryFakeData.INSTANCE
 
-//    val observableFakeDataEntities = MutableLiveData<ArrayList<EntityFakeData>>()
-
     fun addDataEntity(entity: EntityFakeData) {
         repo.addDataEntity(entity)
     }
@@ -31,4 +29,6 @@ class ViewModelWeather(application: Application): AndroidViewModel(application) 
     }
 
 }
+
+
 

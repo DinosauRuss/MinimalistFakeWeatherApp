@@ -1,16 +1,13 @@
 package com.example.rek.minimalistfakeweatherapp.views
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.example.rek.minimalistfakeweatherapp.R
-import com.example.rek.minimalistfakeweatherapp.utils.Utils
-import kotlinx.android.synthetic.main.future_weather.view.*
+
 
 class ViewFutureWeather : LinearLayoutCompat {
 

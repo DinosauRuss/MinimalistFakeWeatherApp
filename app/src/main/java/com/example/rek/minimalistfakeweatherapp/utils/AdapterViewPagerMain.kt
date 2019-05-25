@@ -20,7 +20,7 @@ class AdapterViewPagerMain(manager: FragmentManager): FragmentStatePagerAdapter(
     }
 
     /*
-    Adapter needs this to organize fragments after the data changes
+    Adapter uses this method to organize fragments after the data changes
      */
     override fun getItemPosition(`object`: Any): Int {
         if (adapterFakeDataEntities.contains(`object`)) {

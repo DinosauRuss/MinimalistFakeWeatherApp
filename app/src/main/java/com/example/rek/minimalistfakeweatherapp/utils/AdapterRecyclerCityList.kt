@@ -10,7 +10,8 @@ import android.widget.TextView
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeData
 
-class AdapterRecyclerCityList(val context: Context, val listener: ItemPressListener): RecyclerView.Adapter<AdapterRecyclerCityList.ViewHolder>() {
+class AdapterRecyclerCityList(private val context:Context, private val listener:ItemPressListener):
+    RecyclerView.Adapter<AdapterRecyclerCityList.ViewHolder>() {
 
     private var data = ArrayList<EntityFakeData>()
 
@@ -51,7 +52,7 @@ class AdapterRecyclerCityList(val context: Context, val listener: ItemPressListe
             imgIcon.setImageResource( imgs.getResourceId(entity.weatherIconIndex, 0) )
             imgs.recycle()
 
-            v.setOnLongClickListener {
+            v.setOnLongClickListener {v ->
                 listener.onItemLongPress(position)
                 return@setOnLongClickListener true
             }

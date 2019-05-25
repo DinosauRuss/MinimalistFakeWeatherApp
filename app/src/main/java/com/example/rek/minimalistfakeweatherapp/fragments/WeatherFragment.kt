@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeData
 
 import com.example.rek.minimalistfakeweatherapp.R
+import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_weather.*
 import kotlinx.android.synthetic.main.future_weather.view.*
+import java.util.*
 
 class WeatherFragment : Fragment() {
 
@@ -34,16 +36,6 @@ class WeatherFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            pos = it.getInt(CITY_POS)
-//        }
-
-//        pos = arguments?.getInt(CITY_POS, DEFAULT_POS) ?: DEFAULT_POS
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,7 +52,9 @@ class WeatherFragment : Fragment() {
         // Retrieve and display the fake weather data from the Bundle
         val args = arguments
         if (args != null) {
-            val jsonEntity = Gson().fromJson<EntityFakeData>(args.getString(JSON_ENTITY), EntityFakeData::class.java)
+            val jsonEntity = Gson().fromJson<EntityFakeData>(
+                args.getString(JSON_ENTITY), EntityFakeData::class.java
+            )
             val imgs = resources.obtainTypedArray(R.array.WeatherIcons)
 
             // Primary day data
@@ -78,12 +72,14 @@ class WeatherFragment : Fragment() {
         }
     }
 
-    private fun bindFutureData(view: ViewFutureWeather, day: EntityFakeData.FutureDayWeather) {
+    private fun bindFutureData(view: ViewFutureWeather, entity: EntityFakeData.FutureDayWeather) {
+        val todayInt = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
         val imgs = resources.obtainTypedArray(R.array.WeatherIcons)
 
-        view.tvFutureDay.text = "NULL"
-        view.imgFutureWeatherIcon.setImageResource( imgs.getResourceId(day.iconIndex, -1) )
-        val futureTemps = "${day.tempHi}/${day.tempLo}"
+
+        view.tvFutureDay.text = Utils.dayTextFromInt( (todayInt + entity.daysAhead) )
+        view.imgFutureWeatherIcon.setImageResource(imgs.getResourceId(entity.iconIndex, -1))
+        val futureTemps = "${entity.tempHi}/${entity.tempLo}"
         view.tvFutureTemps.text = futureTemps
 
         imgs.recycle()
