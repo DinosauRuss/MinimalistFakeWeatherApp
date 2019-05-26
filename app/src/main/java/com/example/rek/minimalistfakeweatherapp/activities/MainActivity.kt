@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeData
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterViewPagerMain
 import com.example.rek.minimalistfakeweatherapp.architecture.ViewModelWeather
@@ -31,25 +30,22 @@ class MainActivity : AppCompatActivity() {
         vModel = ViewModelProviders.of(this).get(ViewModelWeather::class.java)
         vModel.getFakeData().observe(this, Observer {
             if (it != null) vpAdapter.dataSetChanged(it)
+            vModel.saveCitiesSharedPref()
         })
 
         // Load data on first run
         if (savedInstanceState == null) {
-
             // Load data from SharedPreferences
             val prefs = getSharedPreferences(Utils.SHARED_PREFERENCES, Context.MODE_PRIVATE)
             val namesStr = prefs.getString(Utils.PREF_NAMES, "")
-//            val type = object : TypeToken<ArrayList<String>>() {}.type
-//            val namesArray = Gson().fromJson<ArrayList<String>>(namesStr, type) ?: ArrayList()
             if (namesStr != "") {
-                val namesArray = Gson().fromJson(namesStr, Array<String>::class.java).toMutableList()
+                val namesArray = Gson().fromJson(namesStr, Array<String>::class.java).toSet()
 
                 for (name in namesArray) {
                     Log.d(Utils.TAG, name)
                     addCity(name)
                 }
             }
-
 
             // Sample data
 //            addCity("St. Louis")
@@ -70,7 +66,6 @@ class MainActivity : AppCompatActivity() {
 //            addCity("Australia")
         }
     }
-
 
     private fun initLayout() {
         setContentView(R.layout.activity_main)
@@ -109,6 +104,7 @@ class MainActivity : AppCompatActivity() {
     private fun addCity(name: String) {
         vModel.addCity(name)
     }
+
 }
 
 

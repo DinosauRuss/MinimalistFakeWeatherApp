@@ -7,7 +7,7 @@ import android.content.Context.MODE_PRIVATE
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.google.gson.Gson
 
-class RepositoryFakeData private constructor(private val application: Application) {
+class RepositoryFakeData private constructor() {
 
     private val observableFakeDataEntities = MutableLiveData<ArrayList<EntityFakeData>>()
     private val localEntitiesArray = ArrayList<EntityFakeData>()
@@ -16,12 +16,11 @@ class RepositoryFakeData private constructor(private val application: Applicatio
 
         private var INSTANCE: RepositoryFakeData? = null
 
-        fun getInstance(application: Application) =
+        fun getInstance() =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: RepositoryFakeData(application).also { INSTANCE = it }
-        }
+                INSTANCE ?: RepositoryFakeData().also { INSTANCE = it }
+            }
     }
-
 
     fun getObservableFakeData(): LiveData<ArrayList<EntityFakeData>> {
         return observableFakeDataEntities
@@ -34,28 +33,28 @@ class RepositoryFakeData private constructor(private val application: Applicatio
         localEntitiesArray.add(entity)
         observableFakeDataEntities.value = localEntitiesArray
 
-        saveCitiesSharedPref()
+//        saveCitiesSharedPref()
     }
 
     fun removeEntity(position: Int) {
         localEntitiesArray.removeAt(position)
         observableFakeDataEntities.value = localEntitiesArray
 
-        saveCitiesSharedPref()
+//        saveCitiesSharedPref()
     }
 
     fun popEntity() {
         localEntitiesArray.removeAt(localEntitiesArray.size - 1)
         observableFakeDataEntities.value = localEntitiesArray
 
-        saveCitiesSharedPref()
+//        saveCitiesSharedPref()
     }
 
     fun getSingleEntity(position: Int): EntityFakeData {
         return localEntitiesArray[position]
     }
 
-    private fun saveCitiesSharedPref() {
+    fun saveCitiesSharedPref(application: Application) {
         val sharedPref = application.getSharedPreferences(Utils.SHARED_PREFERENCES, MODE_PRIVATE)
         val edito = sharedPref.edit()
 
