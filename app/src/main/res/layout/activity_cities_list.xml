@@ -10,7 +10,7 @@
     android:padding="12dp">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/listToolbar"
+        android:id="@+id/toolbarList"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/transparent"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        app:layout_constraintTop_toBottomOf="@id/listToolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbarList"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/rvCityList"

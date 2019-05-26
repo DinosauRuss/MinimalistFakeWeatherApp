@@ -70,9 +70,8 @@ class MainActivity : AppCompatActivity() {
     private fun initLayout() {
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(mainToolbar)
+        setSupportActionBar(toolbarMain)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -86,7 +85,10 @@ class MainActivity : AppCompatActivity() {
                 val intento = Intent(this, CitiesListActivity::class.java)
                 startActivity(intento)
             }
-            R.id.menuAdd -> Log.d(Utils.TAG, "add")
+            R.id.menuAdd -> {
+                val intento = Intent(this, AddCityActivity::class.java)
+                startActivity(intento)
+            }
             R.id.menuSettings -> Log.d(Utils.TAG, "settings")
         }
         return true

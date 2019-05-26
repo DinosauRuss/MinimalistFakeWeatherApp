@@ -25,9 +25,9 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities_list)
 
-        setSupportActionBar(listToolbar)
+        setSupportActionBar(toolbarList)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initRecyclerView()
 
@@ -46,6 +46,7 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
         when (item?.itemId) {
             R.id.menuAdd -> Log.d(Utils.TAG, "second add")
             R.id.menuSettings -> Log.d(Utils.TAG, "second settings")
+            android.R.id.home -> onBackPressed()    // Up/back button on toolbar
         }
         return true
     }
