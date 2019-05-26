@@ -6,8 +6,8 @@ import android.arch.lifecycle.LiveData
 
 class ViewModelWeather(application: Application): AndroidViewModel(application) {
 
-    private val app = application
-    private val repo = RepositoryFakeData.INSTANCE
+//    private val app = application
+    private val repo = RepositoryFakeData.getInstance(application)
 
     fun getFakeData(): LiveData<ArrayList<EntityFakeData>> {
         return repo.getObservableFakeData()
@@ -17,24 +17,24 @@ class ViewModelWeather(application: Application): AndroidViewModel(application) 
         return repo.getSingleEntity(position)
     }
 
-    fun addDataEntity(entity: EntityFakeData) {
-        repo.addDataEntity(entity)
-        saveCitiesSharedPref()
+    fun addCity(name: String) {
+        repo.addCity(name)
+//        saveCitiesSharedPref()
     }
 
     fun removeEntity(position: Int) {
         repo.removeEntity(position)
-        saveCitiesSharedPref()
+//        saveCitiesSharedPref()
     }
 
     fun popEntity() {
         repo.popEntity()
-        saveCitiesSharedPref()
+//        saveCitiesSharedPref()
     }
 
-    private fun saveCitiesSharedPref() {
-        repo.saveCitiesSharedPref(app)
-    }
+//    private fun saveCitiesSharedPref() {
+//        repo.saveCitiesSharedPref(app)
+//    }
 
 }
 

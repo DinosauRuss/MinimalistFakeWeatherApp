@@ -15,7 +15,6 @@ import com.example.rek.minimalistfakeweatherapp.utils.AdapterViewPagerMain
 import com.example.rek.minimalistfakeweatherapp.architecture.ViewModelWeather
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,8 +33,25 @@ class MainActivity : AppCompatActivity() {
             if (it != null) vpAdapter.dataSetChanged(it)
         })
 
-        // Load sample data on first run
+        // Load data on first run
         if (savedInstanceState == null) {
+
+            // Load data from SharedPreferences
+            val prefs = getSharedPreferences(Utils.SHARED_PREFERENCES, Context.MODE_PRIVATE)
+            val namesStr = prefs.getString(Utils.PREF_NAMES, "")
+//            val type = object : TypeToken<ArrayList<String>>() {}.type
+//            val namesArray = Gson().fromJson<ArrayList<String>>(namesStr, type) ?: ArrayList()
+            if (namesStr != "") {
+                val namesArray = Gson().fromJson(namesStr, Array<String>::class.java).toMutableList()
+
+                for (name in namesArray) {
+                    Log.d(Utils.TAG, name)
+                    addCity(name)
+                }
+            }
+
+
+            // Sample data
 //            addCity("St. Louis")
 //            addCity("Anaheim")
 //            addCity("Michigan")
@@ -52,16 +68,6 @@ class MainActivity : AppCompatActivity() {
 //            addCity("Wyoming")
 //            addCity("Idaho")
 //            addCity("Australia")
-
-            // Load data from SharedPreferences
-            val prefs = getSharedPreferences(Utils.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-            val namesStr = prefs.getString(Utils.PREF_NAMES, "")
-            val type = object : TypeToken<ArrayList<String>>() {}.type
-            val namesArray = Gson().fromJson<ArrayList<String>>(namesStr, type)
-            for (s in namesArray) {
-                Log.d(Utils.TAG, s)
-                addCity(s)
-            }
         }
     }
 
@@ -101,7 +107,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addCity(name: String) {
-        val newEntity = EntityFakeData(name)
-        vModel.addDataEntity(newEntity)
+        vModel.addCity(name)
     }
 }
+
+
