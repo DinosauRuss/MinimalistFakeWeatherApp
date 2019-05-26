@@ -4,16 +4,28 @@
     <string name="farenheight" translatable="false">F</string>
     <string name="celsius" translatable="false">C</string>
 
-    <string name="oops">Oops, something when wrong</string>
     <string name="cities">cities</string>
     <string name="add">add</string>
     <string name="settings">settings</string>
-    <string name="city_deleted">%s has been deleted</string>
-    <string name="city_remove_title">Delete City?</string>
-    <string name="city_remove_question">Delete %s?</string>
-    <string name="confirm">Confirm</string>
-    <string name="cancel">Cancel</string>
+    <string name="alert_dialog_remove_title">Delete City?</string>
+    <string name="alert_dialog_remove_question">Delete %s?</string>
+    <string name="alert_dialog_confirm">Confirm</string>
+    <string name="alert_dialog_cancel">Cancel</string>
     <string name="hint_city_name">City Name</string>
+    <string name="toast_cannot_find_city">Cannot find city</string>
+    <string name="toast_city_deleted">%s has been deleted</string>
+    <string name="toast_added">Added %s</string>
+
+    <string-array name="temp_cities_list" translatable="false">
+        <item>Madison, WI</item>
+        <item>Chicago, IL</item>
+        <item>Sydney, Australia</item>
+        <item>London, England</item>
+        <item>San Francisco, CA</item>
+        <item>Milwaukee, WI</item>
+        <item>Atlanta, GA</item>
+        <item>Little Rock, AK</item>
+    </string-array>
 
 </resources>
 

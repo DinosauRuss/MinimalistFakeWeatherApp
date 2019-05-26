@@ -2,6 +2,7 @@ package com.example.rek.minimalistfakeweatherapp.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -44,7 +45,10 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.menuAdd -> Log.d(Utils.TAG, "second add")
+            R.id.menuAdd -> {
+                val intento = Intent(this, AddCityActivity::class.java)
+                startActivity(intento)
+            }
             R.id.menuSettings -> Log.d(Utils.TAG, "second settings")
             android.R.id.home -> onBackPressed()    // Up/back button on toolbar
         }
@@ -64,14 +68,14 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
 
         val buildo = AlertDialog.Builder(this)
         buildo
-            .setTitle(res.getString(R.string.city_remove_title))
-            .setMessage(res.getString(R.string.city_remove_question).format(name))
-            .setPositiveButton(res.getString(R.string.confirm)) { dialog, which ->
-                val toastMessage = resources.getString(R.string.city_deleted).format(name)
+            .setTitle(res.getString(R.string.alert_dialog_remove_title))
+            .setMessage(res.getString(R.string.alert_dialog_remove_question).format(name))
+            .setPositiveButton(res.getString(R.string.alert_dialog_confirm)) { dialog, which ->
+                val toastMessage = resources.getString(R.string.toast_city_deleted).format(name)
                 Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
                 vModel.removeEntity(position)
             }
-            .setNegativeButton(res.getString(R.string.cancel)) {dialog, which ->
+            .setNegativeButton(res.getString(R.string.alert_dialog_cancel)) { dialog, which ->
                 dialog.cancel()
             }
 
