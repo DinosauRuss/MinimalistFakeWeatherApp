@@ -5,11 +5,11 @@ import com.example.rek.minimalistfakeweatherapp.R
 
 class CityNamesObject(context: Context) {
 
-    private val namesList: Array<String> by lazy {
-        context.resources.getStringArray(R.array.temp_cities_list)
+    private val namesList: List<String> by lazy {
+        context.resources.getStringArray(R.array.temp_cities_list).asList()
     }
 
-        fun getNames(): Array<String>  {
+        fun getNames(): List<String>  {
             return namesList
         }
 

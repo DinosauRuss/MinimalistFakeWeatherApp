@@ -22,6 +22,7 @@ android {
     }
 }
 
+apply plugin: 'kotlin-kapt'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -33,8 +34,16 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    // 1: Room Components
+    def roomVersion = "1.1.1"
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+
+
     // ViewModel
-    implementation "android.arch.lifecycle:extensions:1.1.1"
+    def lifecycleVersion = "1.1.1"
+    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$lifecycleVersion"
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.5'

@@ -5,9 +5,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeData
+import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeWeather
 
 import com.example.rek.minimalistfakeweatherapp.R
+import com.example.rek.minimalistfakeweatherapp.architecture.EntityWeather
+import com.example.rek.minimalistfakeweatherapp.architecture.FutureDayWeather
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
 import com.google.gson.Gson
@@ -21,7 +23,7 @@ class WeatherFragment : Fragment() {
         private const val JSON_ENTITY = "json_entity"
 
         // Method for creating new instances of the fragment
-        fun newInstance(entity: EntityFakeData): WeatherFragment {
+        fun newInstance(entity: EntityWeather): WeatherFragment {
             // Store the fake weather data in a Bundle object
 
             val args = Bundle()
@@ -52,30 +54,29 @@ class WeatherFragment : Fragment() {
         // Retrieve and display the fake weather data from the Bundle
         val args = arguments
         if (args != null) {
-            val jsonEntity = Gson().fromJson<EntityFakeData>(
-                args.getString(JSON_ENTITY), EntityFakeData::class.java
+            val weatherEntity = Gson().fromJson<EntityWeather>(
+                args.getString(JSON_ENTITY), EntityFakeWeather::class.java
             )
             val imgs = resources.obtainTypedArray(R.array.WeatherIcons)
 
             // Primary day data
-            tvCityName.text = jsonEntity.name
-            val temp = "${jsonEntity.temp}\u00B0"
+            tvCityName.text = weatherEntity.name
+            val temp = "${weatherEntity.temp}\u00B0"
             tvCityTemp.text = temp
-            imgCityWeather.setImageResource(imgs.getResourceId(jsonEntity.weatherIconIndex, -1))
+            imgCityWeather.setImageResource(imgs.getResourceId(weatherEntity.weatherIconIndex, -1))
             imgs.recycle()
 
             // Future Days
-            bindFutureData(futureViewPlusOne, jsonEntity.futureDayOne)
-            bindFutureData(futureViewPlusTwo, jsonEntity.futureDayTwo)
-            bindFutureData(futureViewPlusThree, jsonEntity.futureDayThree)
-            bindFutureData(futureViewPlusFour, jsonEntity.futureDayFour)
+            bindFutureData(futureViewPlusOne, weatherEntity.futureDayOne)
+            bindFutureData(futureViewPlusTwo, weatherEntity.futureDayTwo)
+            bindFutureData(futureViewPlusThree, weatherEntity.futureDayThree)
+            bindFutureData(futureViewPlusFour, weatherEntity.futureDayFour)
         }
     }
 
-    private fun bindFutureData(view: ViewFutureWeather, entity: EntityFakeData.FutureDayWeather) {
+    private fun bindFutureData(view: ViewFutureWeather, entity: FutureDayWeather) {
         val todayInt = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
         val imgs = resources.obtainTypedArray(R.array.WeatherIcons)
-
 
         view.tvFutureDay.text = Utils.dayTextFromInt( (todayInt + entity.daysAhead) )
         view.imgFutureWeatherIcon.setImageResource(imgs.getResourceId(entity.iconIndex, -1))

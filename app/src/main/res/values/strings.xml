@@ -12,7 +12,8 @@
     <string name="alert_dialog_confirm">Confirm</string>
     <string name="alert_dialog_cancel">Cancel</string>
     <string name="hint_city_name">City Name</string>
-    <string name="toast_cannot_find_city">Cannot find city</string>
+    <string name="toast_already_registered">%s already registered</string>
+    <string name="toast_unknown_city">Unknown city</string>
     <string name="toast_city_deleted">%s has been deleted</string>
     <string name="toast_added">Added %s</string>
 
@@ -24,7 +25,13 @@
         <item>San Francisco, CA</item>
         <item>Milwaukee, WI</item>
         <item>Atlanta, GA</item>
-        <item>Little Rock, AK</item>
+        <item>Little Rock, AR</item>
+        <item>Montpelier, VT</item>
+        <item>Madagascar</item>
+        <item>Madrid, Spain</item>
+        <item>Manchester, NH</item>
+        <item>Marseille, France</item>
+        <item>Boise, ID</item>
     </string-array>
 
 </resources>

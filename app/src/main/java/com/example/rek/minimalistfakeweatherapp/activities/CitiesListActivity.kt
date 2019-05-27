@@ -33,7 +33,7 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
         initRecyclerView()
 
         vModel = ViewModelProviders.of(this).get(ViewModelWeather::class.java)
-        vModel.getFakeData().observe(this, Observer {
+        vModel.getWeatherData().observe(this, Observer {
             if (it != null ) rvAdapter.setData(it)
         })
     }

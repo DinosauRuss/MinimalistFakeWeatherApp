@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         viewPagerMain.adapter = vpAdapter
 
         vModel = ViewModelProviders.of(this).get(ViewModelWeather::class.java)
-        vModel.getFakeData().observe(this, Observer {
+        vModel.getWeatherData().observe(this, Observer {
             if (it != null) vpAdapter.dataSetChanged(it)
             vModel.saveCitiesSharedPref()
         })
@@ -46,24 +46,6 @@ class MainActivity : AppCompatActivity() {
                     addCity(name)
                 }
             }
-
-            // Sample data
-//            addCity("St. Louis")
-//            addCity("Anaheim")
-//            addCity("Michigan")
-//            addCity("Seattle, WA")
-//            addCity("Miami, Fl")
-//            addCity("Denver, CO")
-//            addCity("Houston, TX")
-//            addCity("Washington, DC")
-//            addCity("Sioux Falls, ND")
-//            addCity("Birmingham, AL")
-//            addCity("Boston, MA")
-//            addCity("Wilmington, DE")
-//            addCity("Chicago, IL")
-//            addCity("Wyoming")
-//            addCity("Idaho")
-//            addCity("Australia")
         }
     }
 
