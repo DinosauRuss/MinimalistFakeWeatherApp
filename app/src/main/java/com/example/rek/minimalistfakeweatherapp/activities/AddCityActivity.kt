@@ -7,6 +7,8 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.architecture.ViewModelWeather
+import com.example.rek.minimalistfakeweatherapp.db.City
+import com.example.rek.minimalistfakeweatherapp.db.CityViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterAutoCompleteTextView
 import com.example.rek.minimalistfakeweatherapp.utils.CityNamesObject
 import com.example.rek.minimalistfakeweatherapp.utils.TypingDetector
@@ -28,10 +30,10 @@ class AddCityActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val adapto = AdapterAutoCompleteTextView(this, android.R.layout.select_dialog_item)
-        adapto.addAll(namesObject.getNames())
+//        adapto.addAll(namesObject.getNames())
         actvCities.setAdapter(adapto)
 
-        actvCities.addTextChangedListener( TypingDetector() )
+        actvCities.addTextChangedListener(TypingDetector(this, adapto))
 
         btnAddCity.setOnClickListener { btnAddCallback() }
     }
@@ -49,7 +51,12 @@ class AddCityActivity : AppCompatActivity() {
         if (vModel.entityInModel(name)) {
             val msg = resources.getString(R.string.toast_already_registered).format(name)
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-        } else if (name.isNotEmpty() && namesObject.verifyName(name) && !vModel.entityInModel(name)) {
+//        } else if (name.isNotEmpty() && namesObject.verifyName(name) && !vModel.entityInModel(name)) {
+//            vModel.addCity(name)
+//            val msg = resources.getString(R.string.toast_added).format(name)
+//            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+//            finish()
+        } else if (name.isNotEmpty() && !vModel.entityInModel(name)) {
             vModel.addCity(name)
             val msg = resources.getString(R.string.toast_added).format(name)
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
