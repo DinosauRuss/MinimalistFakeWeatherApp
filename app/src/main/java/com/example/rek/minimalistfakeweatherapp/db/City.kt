@@ -1,19 +1,14 @@
 package com.example.rek.minimalistfakeweatherapp.db
 
 import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import android.support.annotation.NonNull
 
-@Entity(tableName = "cities_db")
-class City (
-    @PrimaryKey
-//    @ColumnInfo(name = "name")
-    var name: String,
+@Entity(primaryKeys = ["name", "region"], tableName = "world_cities")
+data class City (
 
-//    @ColumnInfo(name = "region")
-    var region: String ) {
+    @NonNull
+    val name: String,
 
-    fun getProperName(): String {
-        return "$name, $region"
-    }
+    @NonNull
+    val region: String )
 
-}

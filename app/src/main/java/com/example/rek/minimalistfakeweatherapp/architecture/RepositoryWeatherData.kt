@@ -3,12 +3,9 @@ package com.example.rek.minimalistfakeweatherapp.architecture
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import com.example.rek.minimalistfakeweatherapp.db.CitiesDb
-import com.example.rek.minimalistfakeweatherapp.db.City
 import com.example.rek.minimalistfakeweatherapp.db.CityDao
 import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefEditor
-import com.example.rek.minimalistfakeweatherapp.utils.Utils
 
 class RepositoryWeatherData private constructor(application: Application) {
 
@@ -19,10 +16,6 @@ class RepositoryWeatherData private constructor(application: Application) {
     private val prefEditorObject = SharedPrefEditor(application)
 
     private val cityDao: CityDao = CitiesDb.getInstance(application).cityDao()
-
-    init {
-        Log.d(Utils.TAG, "repo db: $CitiesDb")
-    }
 
     companion object {
         private var INSTANCE: RepositoryWeatherData? = null
@@ -64,23 +57,16 @@ class RepositoryWeatherData private constructor(application: Application) {
     }
 
     // ----- Methods for cities database -----
-//    fun getCities(name:String): ArrayList<String> {
-//
-//        val cityList = cityDao.getCitiesList(name)
-//        val returnList= ArrayList<String>()
-//        for( city in cityList ) {
-//            returnList.add(city.getProperName())
-//        }
-//
-//        return returnList
-//    }
-
-    fun getAll(): List<City> {
-       return cityDao.getAll()
+    fun verifyCity(name: String): String {
+        return cityDao.verifyCity(name)
     }
 
-    fun insert(city: City) {
-        cityDao.insert(city)
+    fun getCitiesSimilar(name: String): List<String> {
+        return cityDao.getCitiesSimilar(name)
+    }
+
+    fun getFirstFive(): List<String> {
+       return cityDao.getFirstFive()
     }
 
     // ----- Other methods -----

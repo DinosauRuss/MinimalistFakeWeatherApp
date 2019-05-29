@@ -5,14 +5,17 @@ import android.arch.persistence.room.*
 @Dao
 interface CityDao {
 
-    @Query("SELECT * FROM cities_db WHERE name==:name")
-    fun getCitiesList(name: String): List<City>
+    @Query("SELECT name || ', ' || region FROM world_cities WHERE name || ', ' || region LIKE :name")
+    fun verifyCity(name: String): String
 
-    @Query("SELECT * FROM cities_db LIMIT 5")
-    fun getAll(): List<City>
+    @Query("SELECT name || ', ' || region FROM world_cities WHERE " +
+            "name || ', ' || region LIKE  :name || '%'")
+        fun getCitiesSimilar(name: String): List<String>
+
+    @Query("SELECT name || ', ' || region FROM world_cities LIMIT 5")
+    fun getFirstFive(): List<String>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(city: City)
-
 }
 

@@ -2,31 +2,39 @@ package com.example.rek.minimalistfakeweatherapp.db
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.util.Log
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import com.example.rek.minimalistfakeweatherapp.architecture.RepositoryWeatherData
-import com.example.rek.minimalistfakeweatherapp.utils.Utils
 
 class CityViewModel(application: Application): AndroidViewModel(application) {
 
     private val repo = RepositoryWeatherData.getInstance(application)
 
-//    fun getCitiesList(name: String): ArrayList<String> {
-//        return repo.getCities(name)
-//    }
+    private var typingFlag = MutableLiveData<Boolean>()
 
-    fun getAll(): List<String> {
-        val cities = repo.getAll()
-//        Log.d(Utils.TAG, "vm: $cities")
-
-        val strList = ArrayList<String>()
-        for (city in cities) {
-            strList.add(city.getProperName())
-        }
-
-        return strList
+    fun verifyCity(name: String): String {
+        return repo.verifyCity(name)
     }
 
-    fun insert(city: City) {
-        repo.insert(city)
+    fun getCitiesSimilar(name: String): List<String> {
+        return repo.getCitiesSimilar(name)
     }
+
+    fun getFirstFive(): List<String> {
+        return repo.getFirstFive()
+    }
+
+    fun typingStarted() {
+        typingFlag.value = true
+    }
+
+    fun typingStopped() {
+        typingFlag.value = false
+    }
+
+    fun getTypingFlag(): LiveData<Boolean> {
+        return typingFlag
+    }
+
 }
