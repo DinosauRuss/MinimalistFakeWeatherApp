@@ -6,6 +6,11 @@ import android.arch.lifecycle.MutableLiveData
 import com.example.rek.minimalistfakeweatherapp.db.CitiesDb
 import com.example.rek.minimalistfakeweatherapp.db.CityDao
 import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefEditor
+import java.util.concurrent.Executors
+import android.provider.SyncStateContract.Helpers.update
+import android.os.AsyncTask.execute
+import java.util.concurrent.ExecutionException
+
 
 class RepositoryWeatherData private constructor(application: Application) {
 
@@ -16,6 +21,7 @@ class RepositoryWeatherData private constructor(application: Application) {
     private val prefEditorObject = SharedPrefEditor(application)
 
     private val cityDao: CityDao = CitiesDb.getInstance(application).cityDao()
+    private val mIoExecutor = Executors.newSingleThreadExecutor()
 
     companion object {
         private var INSTANCE: RepositoryWeatherData? = null
@@ -66,7 +72,7 @@ class RepositoryWeatherData private constructor(application: Application) {
     }
 
     fun getFirstFive(): List<String> {
-       return cityDao.getFirstFive()
+        return cityDao.getFirstFive()
     }
 
     // ----- Other methods -----

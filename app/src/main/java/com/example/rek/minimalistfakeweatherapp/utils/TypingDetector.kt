@@ -5,47 +5,28 @@ import android.content.Context
 import android.support.v4.app.FragmentActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import com.example.rek.minimalistfakeweatherapp.db.CityViewModel
-import java.util.*
 
 class TypingDetector(context: Context): TextWatcher {
 
-    private val DELAY: Long = 750
-    private var timer = Timer()
+    private val letterThreshold: Int = 3
 
     private val vModelCity =
         ViewModelProviders.of(context as FragmentActivity).get(CityViewModel::class.java)
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        timer.cancel()
-        vModelCity.typingStarted()
-    }
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
     override fun afterTextChanged(s: Editable?) {
         val len = s?.length ?: return
-        timer = Timer()
-        if (len >= 3) {
-            timer.schedule(
-                object : TimerTask() {
-                    override fun run() {
-                        Log.d(Utils.TAG, "typing stopped")
-                        vModelCity.typingStopped()
-
-                        val text = s.toString().trim()
-                        val namesList = vModelCity.getCitiesSimilar(text)
-                        for (name in namesList) {
-                            Log.d(Utils.TAG, "detector: $name")
-                        }
-
-                        val v = vModelCity.verifyCity(text)
-                        Log.d(Utils.TAG, "verify: $v")
-                    }
-                }, DELAY
-            )
+        if (len >= letterThreshold) {
+            vModelCity.allowNewData()
+        } else {
+            vModelCity.doNotAllowNewData()
         }
     }
 
 }
+
+

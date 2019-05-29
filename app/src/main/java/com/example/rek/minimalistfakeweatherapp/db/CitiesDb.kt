@@ -109,7 +109,6 @@ abstract class CitiesDb : RoomDatabase() {
 
         private fun copyDatabaseFile(application: Application, dbName: String) {
             val file = application.getDatabasePath(dbName)
-            Log.d(Utils.TAG, "file: $file")
 
             // If the database already exists, return
             if (file.exists()) {
