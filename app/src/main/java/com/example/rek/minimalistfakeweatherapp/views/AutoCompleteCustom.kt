@@ -19,11 +19,7 @@ class AutoCompleteCustom: AutoCompleteTextView {
     private val vModel = ViewModelProviders.of(context as FragmentActivity).get(CityViewModel::class.java)
 
     init {
-        val itemListener = object: AdapterView.OnItemClickListener {
-            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                vModel.doNotAllowNewData()
-            }
-        }
+        val itemListener = AdapterView.OnItemClickListener { parent, view, position, id -> vModel.doNotAllowNewData() }
         this.onItemClickListener = itemListener
 
         this.addTextChangedListener(typo)

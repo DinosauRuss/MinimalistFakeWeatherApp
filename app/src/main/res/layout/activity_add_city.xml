@@ -23,7 +23,7 @@
         android:background="@color/white"
         android:completionThreshold="3"
         android:hint="@string/hint_city_name"
-        android:inputType="text"
+        android:inputType="textCapWords"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

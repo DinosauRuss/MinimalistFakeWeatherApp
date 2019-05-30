@@ -16,8 +16,8 @@ class CityViewModel(application: Application): AndroidViewModel(application) {
         allowNewData.postValue(false)
     }
 
-    fun verifyCity(name: String): String {
-        return repo.verifyCity(name)
+    fun verifyCity(name: String): Boolean {
+        return repo.verifyCity(name) != null
     }
 
     fun getCitiesSimilar(name: String): List<String> {
