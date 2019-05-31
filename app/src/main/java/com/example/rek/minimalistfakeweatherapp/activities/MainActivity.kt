@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.preference.PreferenceManager
+import android.support.design.widget.TabLayout
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -63,6 +64,8 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbarMain)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        tabLayout.setupWithViewPager(viewPagerMain)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

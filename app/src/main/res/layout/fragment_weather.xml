@@ -61,7 +61,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="?attr/actionBarSize">
 
         <com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
             android:id="@+id/futureViewPlusOne"
