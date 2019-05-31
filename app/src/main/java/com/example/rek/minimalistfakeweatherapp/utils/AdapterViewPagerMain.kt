@@ -4,13 +4,12 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
-import com.example.rek.minimalistfakeweatherapp.architecture.EntityFakeWeather
-import com.example.rek.minimalistfakeweatherapp.architecture.EntityWeather
+import com.example.rek.minimalistfakeweatherapp.architecture.WeatherEntity
 import com.example.rek.minimalistfakeweatherapp.fragments.WeatherFragment
 
 class AdapterViewPagerMain(manager: FragmentManager): FragmentStatePagerAdapter(manager) {
 
-    private var localWeatherEntities = ArrayList<EntityWeather>()
+    private var localWeatherEntities = ArrayList<WeatherEntity>()
 
     override fun getItem(position: Int): Fragment {
         return WeatherFragment.newInstance(localWeatherEntities[position])
@@ -21,7 +20,7 @@ class AdapterViewPagerMain(manager: FragmentManager): FragmentStatePagerAdapter(
     }
 
     /*
-    Adapter uses this method to organize fragments after the data changes
+    Adapter uses this method to organize fragments after the ArrayList changes
      */
     override fun getItemPosition(`object`: Any): Int {
         if (localWeatherEntities.contains(`object`)) {
@@ -31,7 +30,7 @@ class AdapterViewPagerMain(manager: FragmentManager): FragmentStatePagerAdapter(
         }
     }
 
-    fun dataSetChanged(newDataList: ArrayList<EntityWeather>) {
+    fun dataSetChanged(newDataList: ArrayList<WeatherEntity>) {
         localWeatherEntities = newDataList
         notifyDataSetChanged()
     }

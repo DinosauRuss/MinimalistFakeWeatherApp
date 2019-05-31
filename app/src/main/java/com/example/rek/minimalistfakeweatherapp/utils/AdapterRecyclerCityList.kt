@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.rek.minimalistfakeweatherapp.R
-import com.example.rek.minimalistfakeweatherapp.architecture.EntityWeather
+import com.example.rek.minimalistfakeweatherapp.architecture.WeatherEntity
 
 class AdapterRecyclerCityList(private val context:Context, private val listener:ItemPressListener):
     RecyclerView.Adapter<AdapterRecyclerCityList.ViewHolder>() {
 
-    private var data = ArrayList<EntityWeather>()
+    private var data = ArrayList<WeatherEntity>()
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): ViewHolder {
         val inflato = LayoutInflater.from(context)
@@ -31,7 +31,7 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
     }
 
 
-    fun setData(newData: ArrayList<EntityWeather>) {
+    fun setData(newData: ArrayList<WeatherEntity>) {
         data = newData
         notifyDataSetChanged()
     }
@@ -42,7 +42,7 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
         private val tvTemp: TextView = v.findViewById(R.id.tvItemTemp)
         private val imgIcon: ImageView = v.findViewById(R.id.imgItemIcon)
 
-        fun setViewData(entity: EntityWeather, position: Int, listener: ItemPressListener) {
+        fun setViewData(entity: WeatherEntity, position: Int, listener: ItemPressListener) {
             tvName.text = entity.name
 
             val temp = "${entity.temp}\u00B0"

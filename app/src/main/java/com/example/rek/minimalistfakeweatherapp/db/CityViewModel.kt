@@ -4,11 +4,11 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import com.example.rek.minimalistfakeweatherapp.architecture.RepositoryWeatherData
+import com.example.rek.minimalistfakeweatherapp.architecture.WeatherRepository
 
 class CityViewModel(application: Application): AndroidViewModel(application) {
 
-    private val repo = RepositoryWeatherData.getInstance(application)
+    private val repo = WeatherRepository.getInstance(application)
 
     private var allowNewData = MutableLiveData<Boolean>()
 

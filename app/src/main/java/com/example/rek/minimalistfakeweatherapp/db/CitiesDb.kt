@@ -112,7 +112,7 @@ abstract class CitiesDb : RoomDatabase() {
 
             // If the database already exists, return
             if (file.exists()) {
-                Log.d(Utils.TAG, "file already exists")
+                Log.d(Utils.TAG, "Database already exists")
                 return
             }
 

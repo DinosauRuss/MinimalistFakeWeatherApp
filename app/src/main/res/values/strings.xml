@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">MinimalistFakeWeatherApp</string>
 
-    <string name="farenheight" translatable="false">F</string>
-    <string name="celsius" translatable="false">C</string>
+    <string name="FARENHEIGHT" translatable="false">F</string>
+    <string name="CELSIUS" translatable="false">C</string>
+    <string name="PREF_NAMES" translatable="false">pref_names</string>
+    <string name="PREF_UNITS" translatable="false">pref_units</string>
+    <string name="SHARED_PREFERENCES" translatable="false">com.example.rek.minimalistfakeweatherapp_preferences</string>
+
 
     <string name="cities">cities</string>
     <string name="add">add</string>
@@ -16,26 +20,6 @@
     <string name="toast_unknown_city">Unknown city</string>
     <string name="toast_city_deleted">%s has been deleted</string>
     <string name="toast_added">Added %s</string>
-
-    <string-array name="temp_cities_list" translatable="false">
-        <item>Madison, WI</item>
-        <item>Chicago, IL</item>
-        <item>Sydney, Australia</item>
-        <item>London, England</item>
-        <item>San Francisco, CA</item>
-        <item>Milwaukee, WI</item>
-        <item>Atlanta, GA</item>
-        <item>Little Rock, AR</item>
-        <item>Montpelier, VT</item>
-        <item>Madagascar</item>
-        <item>Madrid, Spain</item>
-        <item>Manchester, NH</item>
-        <item>Marseille, France</item>
-        <item>Boise, ID</item>
-        <item>Mad City</item>
-        <item>Madden 64</item>
-        <item>Maddeningly</item>
-    </string-array>
 
 </resources>
 

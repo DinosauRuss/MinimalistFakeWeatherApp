@@ -2,45 +2,53 @@ package com.example.rek.minimalistfakeweatherapp.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterViewPagerMain
-import com.example.rek.minimalistfakeweatherapp.architecture.ViewModelWeather
+import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private lateinit var vModel: ViewModelWeather
+    private lateinit var vModelWeather: WeatherViewModel
+    private lateinit var vpAdapter: AdapterViewPagerMain
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val prefNamesKey = getString(R.string.PREF_NAMES)
+
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+        sharedPrefs.registerOnSharedPreferenceChangeListener(this)
+
         initLayout()
 
-        val vpAdapter = AdapterViewPagerMain(supportFragmentManager)
+        vpAdapter = AdapterViewPagerMain(supportFragmentManager)
         viewPagerMain.adapter = vpAdapter
 
-        vModel = ViewModelProviders.of(this).get(ViewModelWeather::class.java)
-        vModel.getWeatherData().observe(this, Observer {
-            if (it != null) vpAdapter.dataSetChanged(it)
-            vModel.saveCitiesSharedPref()
+        vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
+        vModelWeather.getWeatherEntities().observe(this, Observer {
+            if (it != null) {
+                vpAdapter.dataSetChanged(it)
+            }
+            vModelWeather.saveCitiesSharedPref()
         })
 
         // Load data on first run
         if (savedInstanceState == null) {
-            // Load data from SharedPreferences
-            val prefs = getSharedPreferences(Utils.SHARED_PREFERENCES, Context.MODE_PRIVATE)
-            val namesStr = prefs.getString(Utils.PREF_NAMES, "")
+            // Load cities from SharedPreferences
+            val namesStr = sharedPrefs.getString(prefNamesKey, "")
             if (namesStr != "") {
                 val namesArray = Gson().fromJson(namesStr, Array<String>::class.java).toSet()
-
                 for (name in namesArray) {
                     Log.d(Utils.TAG, name)
                     addCity(name)
@@ -71,9 +79,18 @@ class MainActivity : AppCompatActivity() {
                 val intento = Intent(this, AddCityActivity::class.java)
                 startActivity(intento)
             }
-            R.id.menuSettings -> Log.d(Utils.TAG, "settings")
+            R.id.menuSettings -> {
+                val intento = Intent(this, SettingsActivity::class.java)
+                startActivity(intento)
+            }
         }
         return true
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key.equals(getString(R.string.PREF_UNITS))) {
+            recreate()
+        }
     }
 
     override fun onBackPressed() {
@@ -86,7 +103,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addCity(name: String) {
-        vModel.addCity(name)
+        vModelWeather.addCity(name)
     }
 
 }

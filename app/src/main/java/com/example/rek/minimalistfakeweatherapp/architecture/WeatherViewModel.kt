@@ -4,16 +4,16 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 
-class ViewModelWeather(application: Application): AndroidViewModel(application) {
 
-//    private val app = application
-    private val repo = RepositoryWeatherData.getInstance(application)
+class WeatherViewModel(application: Application): AndroidViewModel(application) {
 
-    fun getWeatherData(): LiveData<ArrayList<EntityWeather>> {
-        return repo.getObservableWeatherData()
+    private val repo = WeatherRepository.getInstance(application)
+
+    fun getWeatherEntities(): LiveData<ArrayList<WeatherEntity>> {
+        return repo.getObservableWeatherEntities()
     }
 
-    fun getSingleEntity(position: Int): EntityWeather {
+    fun getSingleEntity(position: Int): WeatherEntity {
         return repo.getSingleEntity(position)
     }
 

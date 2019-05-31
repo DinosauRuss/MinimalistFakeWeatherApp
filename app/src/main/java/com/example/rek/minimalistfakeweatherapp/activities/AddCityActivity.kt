@@ -4,20 +4,18 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.R
-import com.example.rek.minimalistfakeweatherapp.architecture.ViewModelWeather
+import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
 import com.example.rek.minimalistfakeweatherapp.db.CityAccessObject
 import com.example.rek.minimalistfakeweatherapp.db.CityViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterAutoCompleteTextView
-import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_add_city.*
 
 class AddCityActivity : AppCompatActivity() {
 
-    private lateinit var vModelWeather: ViewModelWeather
+    private lateinit var vModelWeather: WeatherViewModel
     private lateinit var vModelCity: CityViewModel
 
     private val cao = CityAccessObject(this)
@@ -35,7 +33,7 @@ class AddCityActivity : AppCompatActivity() {
 
         btnAddCity.setOnClickListener { btnAddCallback() }
 
-        vModelWeather = ViewModelProviders.of(this).get(ViewModelWeather::class.java)
+        vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
         vModelCity = ViewModelProviders.of(this).get(CityViewModel::class.java)
         vModelCity.getTypingFlag().observe(this, Observer { flag ->
             if (flag == true) {

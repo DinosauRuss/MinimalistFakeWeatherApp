@@ -2,24 +2,24 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_orange_dark"
-    tools:context=".fragments.WeatherFragment"
-    android:id="@+id/fragContainer">
+    tools:context=".fragments.WeatherFragment">
 
     <TextView
         android:id="@+id/tvCityName"
         style="@style/CityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintVertical_bias=".2"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="Philadelphia, PA"
-        android:textAlignment="center"/>
+        app:layout_constraintVertical_bias=".2"
+        tools:text="Philadelphia, PA" />
 
     <ImageView
         android:id="@+id/imgCityWeather"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textSize="@dimen/degree_symbol_size"
-            tools:text="@string/farenheight" />
+            tools:text="@string/FARENHEIGHT" />
 
     </LinearLayout>
 
@@ -60,36 +60,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/futureViewPlusOne"
-            android:paddingTop="@dimen/future_view_paddingTop"
-            android:paddingBottom="@dimen/future_view_paddingBottom"/>
-
-        <com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/future_view_paddingTop"
+            android:paddingBottom="@dimen/future_view_paddingBottom" />
+
+        <com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
             android:id="@+id/futureViewPlusTwo"
-            android:paddingTop="@dimen/future_view_paddingTop"
-            android:paddingBottom="@dimen/future_view_paddingBottom"/>
-
-        <com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/future_view_paddingTop"
+            android:paddingBottom="@dimen/future_view_paddingBottom" />
+
+        <com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
             android:id="@+id/futureViewPlusThree"
-            android:paddingTop="@dimen/future_view_paddingTop"
-            android:paddingBottom="@dimen/future_view_paddingBottom"/>
-
-        <com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/futureViewPlusFour"
             android:paddingTop="@dimen/future_view_paddingTop"
-            android:paddingBottom="@dimen/future_view_paddingBottom"/>
+            android:paddingBottom="@dimen/future_view_paddingBottom" />
+
+        <com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
+            android:id="@+id/futureViewPlusFour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/future_view_paddingTop"
+            android:paddingBottom="@dimen/future_view_paddingBottom" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

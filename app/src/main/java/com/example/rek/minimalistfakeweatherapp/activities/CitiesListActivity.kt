@@ -7,19 +7,17 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.R
-import com.example.rek.minimalistfakeweatherapp.architecture.ViewModelWeather
+import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterRecyclerCityList
-import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_cities_list.*
 
 class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPressListener {
 
-    private lateinit var vModel: ViewModelWeather
+    private lateinit var vModel: WeatherViewModel
     private lateinit var rvAdapter: AdapterRecyclerCityList
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +30,8 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
 
         initRecyclerView()
 
-        vModel = ViewModelProviders.of(this).get(ViewModelWeather::class.java)
-        vModel.getWeatherData().observe(this, Observer {
+        vModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
+        vModel.getWeatherEntities().observe(this, Observer {
             if (it != null ) rvAdapter.setData(it)
         })
     }
@@ -49,7 +47,10 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
                 val intento = Intent(this, AddCityActivity::class.java)
                 startActivity(intento)
             }
-            R.id.menuSettings -> Log.d(Utils.TAG, "second settings")
+            R.id.menuSettings -> {
+                val intento = Intent(this, SettingsActivity::class.java)
+                startActivity(intento)
+            }
             android.R.id.home -> onBackPressed()    // Up/back button on toolbar
         }
         return true

@@ -7,34 +7,28 @@ import com.example.rek.minimalistfakeweatherapp.db.CitiesDb
 import com.example.rek.minimalistfakeweatherapp.db.CityDao
 import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefEditor
 import java.util.concurrent.Executors
-import android.provider.SyncStateContract.Helpers.update
-import android.os.AsyncTask.execute
-import java.util.concurrent.ExecutionException
 
 
-class RepositoryWeatherData private constructor(application: Application) {
+class WeatherRepository private constructor(application: Application) {
 
-
-    private val observableWeatherEntities = MutableLiveData<ArrayList<EntityWeather>>()
-    private val localEntitiesArray = ArrayList<EntityWeather>()
+    private val observableWeatherEntities = MutableLiveData<ArrayList<WeatherEntity>>()
+    private val localEntitiesArray = ArrayList<WeatherEntity>()
 
     private val prefEditorObject = SharedPrefEditor(application)
-
     private val cityDao: CityDao = CitiesDb.getInstance(application).cityDao()
-    private val mIoExecutor = Executors.newSingleThreadExecutor()
 
     companion object {
-        private var INSTANCE: RepositoryWeatherData? = null
+        private var INSTANCE: WeatherRepository? = null
 
         fun getInstance(application: Application) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: RepositoryWeatherData(application).also { INSTANCE = it }
+                INSTANCE ?: WeatherRepository(application).also { INSTANCE = it }
             }
     }
 
 
     // ----- Methods for fragments/viewpager -----
-    fun getObservableWeatherData(): LiveData<ArrayList<EntityWeather>> {
+    fun getObservableWeatherEntities(): LiveData<ArrayList<WeatherEntity>> {
         return observableWeatherEntities
     }
 
@@ -51,7 +45,7 @@ class RepositoryWeatherData private constructor(application: Application) {
         observableWeatherEntities.value = localEntitiesArray
     }
 
-    fun getSingleEntity(position: Int): EntityWeather {
+    fun getSingleEntity(position: Int): WeatherEntity {
         return localEntitiesArray[position]
     }
 
@@ -80,8 +74,8 @@ class RepositoryWeatherData private constructor(application: Application) {
         prefEditorObject.saveCitiesSharedPref(localEntitiesArray)
     }
 
-    private fun generateFakeWeatherEntity(name: String): EntityFakeWeather {
-        return EntityFakeWeather(name)
+    private fun generateFakeWeatherEntity(name: String): WeatherEntityFake {
+        return WeatherEntityFake(name)
     }
 
 }

@@ -3,7 +3,7 @@ package com.example.rek.minimalistfakeweatherapp.architecture
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 
 
-class EntityFakeWeather(override val name: String): EntityWeather() {
+class WeatherEntityFake(override val name: String): WeatherEntity() {
 
     // Primary day fake weather data
     override val temp = (Utils.minTemp..Utils.maxTemp).random()
@@ -16,7 +16,7 @@ class EntityFakeWeather(override val name: String): EntityWeather() {
     override val futureDayFour = FutureDayWeatherFake(4, temp)
 
 
-    class FutureDayWeatherFake(override val daysAhead: Int, temp: Int): FutureDayWeather() {
+    class FutureDayWeatherFake(override val daysAhead: Int, temp: Int): WeatherFutureDay() {
         override val iconIndex = (0..3).random()
         override val tempHi: Int = Utils.constrain( ((temp-10)..(temp+10)).random() )
         override val tempLo: Int = Utils.constrain( ((tempHi-20)..(tempHi-10)).random() )

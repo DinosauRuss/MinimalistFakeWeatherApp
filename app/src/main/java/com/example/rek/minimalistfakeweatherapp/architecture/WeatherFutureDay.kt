@@ -1,6 +1,6 @@
 package com.example.rek.minimalistfakeweatherapp.architecture
 
-abstract class FutureDayWeather {
+abstract class WeatherFutureDay {
 
     abstract val daysAhead: Int
     abstract val iconIndex: Int
