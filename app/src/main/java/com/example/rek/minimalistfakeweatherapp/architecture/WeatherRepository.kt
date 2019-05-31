@@ -5,8 +5,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.example.rek.minimalistfakeweatherapp.db.CitiesDb
 import com.example.rek.minimalistfakeweatherapp.db.CityDao
-import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefEditor
-import java.util.concurrent.Executors
+import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefObject
 
 
 class WeatherRepository private constructor(application: Application) {
@@ -14,7 +13,7 @@ class WeatherRepository private constructor(application: Application) {
     private val observableWeatherEntities = MutableLiveData<ArrayList<WeatherEntity>>()
     private val localEntitiesArray = ArrayList<WeatherEntity>()
 
-    private val prefEditorObject = SharedPrefEditor(application)
+    private val sharedPrefObject = SharedPrefObject(application)
     private val cityDao: CityDao = CitiesDb.getInstance(application).cityDao()
 
     companion object {
@@ -71,7 +70,7 @@ class WeatherRepository private constructor(application: Application) {
 
     // ----- Other methods -----
     fun saveCitiesSharedPref() {
-        prefEditorObject.saveCitiesSharedPref(localEntitiesArray)
+        sharedPrefObject.saveCitiesSharedPref(localEntitiesArray)
     }
 
     private fun generateFakeWeatherEntity(name: String): WeatherEntityFake {

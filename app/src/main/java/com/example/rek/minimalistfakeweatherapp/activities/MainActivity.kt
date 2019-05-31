@@ -14,6 +14,7 @@ import android.view.MenuItem
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterViewPagerMain
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
+import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefObject
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,20 +23,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var vModelWeather: WeatherViewModel
-    private lateinit var sharedPrefs: SharedPreferences
+    private lateinit var sharedPrefObject: SharedPrefObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
-        sharedPrefs.registerOnSharedPreferenceChangeListener(this)
-        val prefNamesKey = getString(R.string.PREF_NAMES)
 
         initLayout()
 
         val vpAdapter = AdapterViewPagerMain(supportFragmentManager)
         viewPagerMain.adapter = vpAdapter
 
+        sharedPrefObject = SharedPrefObject(application)
         vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
         vModelWeather.getWeatherEntities().observe(this, Observer {
             if (it != null) {
@@ -47,7 +45,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         // Load data on first run
         if (savedInstanceState == null) {
             // Load cities from SharedPreferences
-            val namesStr = sharedPrefs.getString(prefNamesKey, "")
+            val namesStr = sharedPrefObject.getCitiesSharedPref()
             if (namesStr != "") {
                 val namesArray = Gson().fromJson(namesStr, Array<String>::class.java).toSet()
                 for (name in namesArray) {
@@ -55,7 +53,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     addCity(name)
                 }
             }
-            val prevPos = sharedPrefs.getInt(getString(R.string.PREF_POSITION), 0)
+            val prevPos = sharedPrefObject.getPosition()
             // Needs to be in Handler to allow ViewPager time to fully propagate
             Handler().post { viewPagerMain.currentItem = prevPos }
         }
@@ -92,11 +90,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     override fun onStop() {
         super.onStop()
-
-        val edito = sharedPrefs.edit()
-        val posKey = getString(R.string.PREF_POSITION)
-        edito.putInt(posKey, viewPagerMain.currentItem)
-        edito.apply()
+        sharedPrefObject.savePosition(viewPagerMain.currentItem)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
