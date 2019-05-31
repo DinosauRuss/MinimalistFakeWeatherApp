@@ -5,6 +5,7 @@
     <string name="CELSIUS" translatable="false">C</string>
     <string name="PREF_NAMES" translatable="false">pref_names</string>
     <string name="PREF_UNITS" translatable="false">pref_units</string>
+    <string name="PREF_POSITION" translatable="false">pref_position</string>
     <string name="SHARED_PREFERENCES" translatable="false">com.example.rek.minimalistfakeweatherapp_preferences</string>
 
 

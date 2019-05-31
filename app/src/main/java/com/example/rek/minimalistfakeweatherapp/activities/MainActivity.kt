@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.preference.PreferenceManager
 import android.util.Log
 import android.view.Menu
@@ -17,22 +18,22 @@ import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var vModelWeather: WeatherViewModel
-    private lateinit var vpAdapter: AdapterViewPagerMain
+    private lateinit var sharedPrefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val prefNamesKey = getString(R.string.PREF_NAMES)
-
-        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
         sharedPrefs.registerOnSharedPreferenceChangeListener(this)
+        val prefNamesKey = getString(R.string.PREF_NAMES)
 
         initLayout()
 
-        vpAdapter = AdapterViewPagerMain(supportFragmentManager)
+        val vpAdapter = AdapterViewPagerMain(supportFragmentManager)
         viewPagerMain.adapter = vpAdapter
 
         vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
@@ -54,12 +55,14 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     addCity(name)
                 }
             }
+            val prevPos = sharedPrefs.getInt(getString(R.string.PREF_POSITION), 0)
+            // Needs to be in Handler to allow ViewPager time to fully propagate
+            Handler().post { viewPagerMain.currentItem = prevPos }
         }
     }
 
     private fun initLayout() {
         setContentView(R.layout.activity_main)
-
         setSupportActionBar(toolbarMain)
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
@@ -85,6 +88,15 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
         }
         return true
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        val edito = sharedPrefs.edit()
+        val posKey = getString(R.string.PREF_POSITION)
+        edito.putInt(posKey, viewPagerMain.currentItem)
+        edito.apply()
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
