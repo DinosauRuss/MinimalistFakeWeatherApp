@@ -1,42 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="12dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="12dp">
 
     <TextView
+        android:id="@+id/tvItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvItemName"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="London, England"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
-
-    <ImageView
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:id="@+id/imgItemIcon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tvItemTemp"
-        tools:src="@drawable/weather_sun_temp"
-        android:layout_marginEnd="16dp"/>
+        tools:text="London" />
 
     <TextView
+        android:id="@+id/tvItemRegion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvItemTemp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvItemName"
+        tools:text="United Kingdom" />
+
+    <ImageView
+        android:id="@+id/imgItemIcon"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvItemTemp"
         app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/weather_sun_temp" />
+
+    <TextView
+        android:id="@+id/tvItemTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="75\u00B0"
-        android:textSize="24sp"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="75\u00B0" />
 
 </android.support.constraint.ConstraintLayout>
 

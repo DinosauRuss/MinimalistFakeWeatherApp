@@ -39,11 +39,14 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
     inner class ViewHolder(private val v: View): RecyclerView.ViewHolder(v) {
 
         private val tvName: TextView = v.findViewById(R.id.tvItemName)
+        private val tvRegion: TextView = v.findViewById(R.id.tvItemRegion)
         private val tvTemp: TextView = v.findViewById(R.id.tvItemTemp)
         private val imgIcon: ImageView = v.findViewById(R.id.imgItemIcon)
 
         fun setViewData(entity: WeatherEntity, position: Int, listener: ItemPressListener) {
-            tvName.text = entity.name
+            val nameRegion = entity.name.split(",")
+            tvName.text = nameRegion[0]
+            tvRegion.text = nameRegion[1].trim()
 
             val temp = "${entity.temp}\u00B0"
             tvTemp.text = temp
