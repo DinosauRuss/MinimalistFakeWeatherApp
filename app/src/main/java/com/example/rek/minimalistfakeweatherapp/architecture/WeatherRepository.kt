@@ -6,6 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.example.rek.minimalistfakeweatherapp.db.CitiesDb
 import com.example.rek.minimalistfakeweatherapp.db.CityDao
 import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefObject
+import com.example.rek.minimalistfakeweatherapp.utils.Utils
 
 
 class WeatherRepository private constructor(application: Application) {
@@ -31,12 +32,16 @@ class WeatherRepository private constructor(application: Application) {
         return observableWeatherEntities
     }
 
-    fun addCity(name: String) {
-        // Obtain weather data from anywhere, real or fake
-        val entity = generateFakeWeatherEntity(name)
-
-        localEntitiesArray.add(entity)
-        observableWeatherEntities.value = localEntitiesArray
+    fun addCityWeather(name: String): Int {
+        if (localEntitiesArray.size < Utils.maxCities) {
+            // Obtain weather data from anywhere, real or fake
+            val entity = generateFakeWeatherEntity(name)
+            localEntitiesArray.add(entity)
+            observableWeatherEntities.value = localEntitiesArray
+            return 1
+        } else {
+            return -1
+        }
     }
 
     fun removeEntity(position: Int) {
@@ -53,6 +58,10 @@ class WeatherRepository private constructor(application: Application) {
             if (entity.name == name) return true
         }
         return false
+    }
+
+    fun getNumOfCities(): Int {
+        return localEntitiesArray.size
     }
 
     // ----- Methods for cities database -----

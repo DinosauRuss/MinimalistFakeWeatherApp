@@ -7,11 +7,10 @@ import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.preference.PreferenceManager
-import android.support.design.widget.TabLayout
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterViewPagerMain
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
@@ -51,11 +50,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 val namesArray = Gson().fromJson(namesStr, Array<String>::class.java).toSet()
                 for (name in namesArray) {
                     Log.d(Utils.TAG, name)
-                    addCity(name)
+//                    addCityWeather(name)
+                    vModelWeather.addCity(name)
                 }
             }
+            // Reset ViewPager to previous page
             val prevPos = sharedPrefObject.getPosition()
-            // Needs to be in Handler to allow ViewPager time to fully propagate
+            // Needs to be in Handler to allow ViewPager time to fully populate
             Handler().post { viewPagerMain.currentItem = prevPos }
         }
     }
@@ -80,6 +81,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 startActivity(intento)
             }
             R.id.menuAdd -> {
+                if (vModelWeather.getNumOfCities() >= Utils.maxCities) {
+                    Toast.makeText(this, "Too many cities", Toast.LENGTH_SHORT).show()
+                    return true
+                }
                 val intento = Intent(this, AddCityActivity::class.java)
                 startActivity(intento)
             }
@@ -111,9 +116,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
     }
 
-    private fun addCity(name: String) {
-        vModelWeather.addCity(name)
-    }
+//    private fun addCityWeather(name: String) {
+//        vModelWeather.addCityWeather(name)
+//    }
 
 }
 

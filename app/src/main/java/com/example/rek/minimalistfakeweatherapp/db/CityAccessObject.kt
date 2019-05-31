@@ -15,7 +15,6 @@ class CityAccessObject(activity: FragmentActivity) {
         ViewModelProviders.of(activity).get(CityViewModel::class.java)
     }
 
-
     fun getCitiesSimilar(name: String): List<String> {
         var cities = listOf<String>()
         val latch = CountDownLatch(1)

@@ -6,13 +6,10 @@ class Utils {
 
     companion object {
         const val TAG = "something"
-//        const val SHARED_PREFERENCES = "com.example.rek.minimalistfakeweatherapp_preferences"
-//        const val PREF_NAMES = "pref_names"
-//        const val PREF_UNITS = "pref_units"
-
         const val numOfIcons = 4
         const val minTemp = 20
         const val maxTemp = 99
+        const val maxCities = 9
 
         fun constrain(num:Int, min:Int=(minTemp-10), max:Int=(maxTemp+10)): Int {
             return Math.max( (Math.min(num, max)), min )

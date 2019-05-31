@@ -63,10 +63,14 @@ class AddCityActivity : AppCompatActivity() {
             val msg = resources.getString(R.string.toast_already_registered).format(name)
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         } else if (name.isNotEmpty() && cao.verifyCity(name)) {
-            vModelWeather.addCity(name)
-            val msg = resources.getString(R.string.toast_added).format(name)
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-            finish()
+            val addReturnVal = vModelWeather.addCity(name)
+            if (addReturnVal == -1) {
+                Toast.makeText(this, getString(R.string.toast_city_not_added).format(name), Toast.LENGTH_SHORT).show()
+            } else {
+                val msg = resources.getString(R.string.toast_added).format(name)
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                finish()
+            }
         } else {
             Toast.makeText(this, getString(R.string.toast_unknown_city), Toast.LENGTH_SHORT).show()
         }

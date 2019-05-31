@@ -17,8 +17,8 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
         return repo.getSingleEntity(position)
     }
 
-    fun addCity(name: String) {
-        repo.addCity(name)
+    fun addCity(name: String): Int{
+        return repo.addCityWeather(name)
     }
 
     fun removeEntity(position: Int) {
@@ -33,6 +33,9 @@ class WeatherViewModel(application: Application): AndroidViewModel(application) 
         repo.saveCitiesSharedPref()
     }
 
+    fun getNumOfCities(): Int {
+        return repo.getNumOfCities()
+    }
 }
 
 
