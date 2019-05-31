@@ -21,7 +21,9 @@
     <string name="toast_unknown_city">Unknown city</string>
     <string name="toast_city_deleted">%s has been deleted</string>
     <string name="toast_added">Added %s</string>
-    <string name="toast_city_not_added">Too many cities\n%s not added</string>
+    <string name="toast_city_not_added">"Too many cities, %s not added"</string>
+    <string name="toast_too_many_cities">Too many cities</string>
+    <string name="bg_add_city">Add a city to\nview weather</string>
 
 </resources>
 

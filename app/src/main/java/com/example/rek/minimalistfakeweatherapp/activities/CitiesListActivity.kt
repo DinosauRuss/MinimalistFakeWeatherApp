@@ -5,35 +5,64 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterRecyclerCityList
+import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_cities_list.*
+import java.util.*
 
 class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPressListener {
 
-    private lateinit var vModel: WeatherViewModel
+    private lateinit var vModelWeather: WeatherViewModel
     private lateinit var rvAdapter: AdapterRecyclerCityList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cities_list)
 
+        initLayout()
+        initRecyclerView()
+
+        vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
+        vModelWeather.getWeatherEntities().observe(this, Observer {
+            if (it != null ) rvAdapter.setData(it)
+        })
+    }
+
+    private fun initLayout() {
         setSupportActionBar(toolbarList)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
-        initRecyclerView()
+    override fun onResume() {
+        super.onResume()
 
-        vModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
-        vModel.getWeatherEntities().observe(this, Observer {
-            if (it != null ) rvAdapter.setData(it)
-        })
+        if (vModelWeather.getNumOfCities() < 1) {
+            tvNoCitiesList.visibility = View.VISIBLE
+        }
+
+        if (Utils.checkForNight()) {
+            citiesListContainer.background = ContextCompat.getDrawable(this, R.drawable.bg_night)
+            tvNoCitiesList.setTextColor(ContextCompat.getColor(this, R.color.warm_grey))
+        } else {
+            citiesListContainer.background = null
+            tvNoCitiesList.setTextColor(ContextCompat.getColor(this, android.R.color.black))
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        finish()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -44,6 +73,10 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menuAdd -> {
+                if (vModelWeather.getNumOfCities() >= Utils.maxCities) {
+                    Toast.makeText(this, getString(R.string.toast_too_many_cities), Toast.LENGTH_SHORT).show()
+                    return true
+                }
                 val intento = Intent(this, AddCityActivity::class.java)
                 startActivity(intento)
             }
@@ -65,7 +98,7 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
 
     override fun onItemLongPress(position: Int) {
         val res = resources
-        val name = vModel.getSingleEntity(position).name
+        val name = vModelWeather.getSingleEntity(position).name
 
         val buildo = AlertDialog.Builder(this)
         buildo
@@ -74,7 +107,10 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
             .setPositiveButton(res.getString(R.string.alert_dialog_confirm)) { dialog, which ->
                 val toastMessage = resources.getString(R.string.toast_city_deleted).format(name)
                 Toast.makeText(this, toastMessage, Toast.LENGTH_SHORT).show()
-                vModel.removeEntity(position)
+                vModelWeather.removeEntity(position)
+                if (vModelWeather.getNumOfCities() < 1) {
+                    tvNoCitiesList.visibility = View.VISIBLE
+                }
             }
             .setNegativeButton(res.getString(R.string.alert_dialog_cancel)) { dialog, which ->
                 dialog.cancel()

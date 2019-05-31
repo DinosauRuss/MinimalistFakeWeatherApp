@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBgDefault"
-    tools:context=".activities.CitiesListActivity"
-    android:padding="12dp">
+    android:padding="12dp"
+    tools:context=".activities.CitiesListActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarList"
@@ -19,13 +19,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCityList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        app:layout_constraintTop_toBottomOf="@id/toolbarList"
-        app:layout_constraintStart_toStartOf="parent"
+        android:overScrollMode="never"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/rvCityList"
-        android:overScrollMode="never"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarList" />
+
+    <TextView
+        android:id="@+id/tvNoCitiesList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bg_add_city"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </android.support.constraint.ConstraintLayout>

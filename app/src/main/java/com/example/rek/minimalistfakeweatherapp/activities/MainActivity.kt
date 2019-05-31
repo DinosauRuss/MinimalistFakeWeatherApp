@@ -7,9 +7,12 @@ import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterViewPagerMain
@@ -18,20 +21,19 @@ import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefObject
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var vModelWeather: WeatherViewModel
     private lateinit var sharedPrefObject: SharedPrefObject
+    private val vpAdapter = AdapterViewPagerMain(supportFragmentManager)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initLayout()
-
-        val vpAdapter = AdapterViewPagerMain(supportFragmentManager)
-        viewPagerMain.adapter = vpAdapter
 
         sharedPrefObject = SharedPrefObject(application)
         vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
@@ -50,7 +52,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 val namesArray = Gson().fromJson(namesStr, Array<String>::class.java).toSet()
                 for (name in namesArray) {
                     Log.d(Utils.TAG, name)
-//                    addCityWeather(name)
                     vModelWeather.addCity(name)
                 }
             }
@@ -62,11 +63,14 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     private fun initLayout() {
+
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbarMain)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        viewPagerMain.adapter = vpAdapter
         tabLayout.setupWithViewPager(viewPagerMain)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -82,7 +86,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
             R.id.menuAdd -> {
                 if (vModelWeather.getNumOfCities() >= Utils.maxCities) {
-                    Toast.makeText(this, "Too many cities", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.toast_too_many_cities), Toast.LENGTH_SHORT).show()
                     return true
                 }
                 val intento = Intent(this, AddCityActivity::class.java)
@@ -101,6 +105,23 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         sharedPrefObject.savePosition(viewPagerMain.currentItem)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (vpAdapter.count < 1) {
+            tvNoCities.visibility = View.VISIBLE
+            if (Utils.checkForNight()) {
+                bgMainActivity.background = ContextCompat.getDrawable(this, R.drawable.bg_night)
+                tvNoCities.setTextColor(ContextCompat.getColor(this, R.color.warm_grey))
+            } else {
+                bgMainActivity.background = null
+                tvNoCities.setTextColor(ContextCompat.getColor(this, android.R.color.black))
+            }
+        } else {
+            tvNoCities.visibility = View.GONE
+        }
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key.equals(getString(R.string.PREF_UNITS))) {
             recreate()
@@ -115,10 +136,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             viewPagerMain.currentItem -= 1
         }
     }
-
-//    private fun addCityWeather(name: String) {
-//        vModelWeather.addCityWeather(name)
-//    }
 
 }
 

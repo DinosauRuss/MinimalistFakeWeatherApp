@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.R
@@ -11,6 +12,7 @@ import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
 import com.example.rek.minimalistfakeweatherapp.db.CityAccessObject
 import com.example.rek.minimalistfakeweatherapp.db.CityViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterAutoCompleteTextView
+import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_add_city.*
 
 class AddCityActivity : AppCompatActivity() {
@@ -49,6 +51,16 @@ class AddCityActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (Utils.checkForNight()) {
+            bgAddActivity.background = ContextCompat.getDrawable(this, R.drawable.bg_night)
+        } else {
+            bgAddActivity.background = null
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> onBackPressed()
@@ -59,7 +71,7 @@ class AddCityActivity : AppCompatActivity() {
     private fun btnAddCallback() {
         val name = actvCities.text.toString().trim()
 
-        if (vModelWeather.entityInModel(name)) {
+        if (name.isNotEmpty() && vModelWeather.entityInModel(name)) {
             val msg = resources.getString(R.string.toast_already_registered).format(name)
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
         } else if (name.isNotEmpty() && cao.verifyCity(name)) {

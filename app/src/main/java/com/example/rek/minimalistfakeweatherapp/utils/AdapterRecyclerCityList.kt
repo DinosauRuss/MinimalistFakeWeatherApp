@@ -1,6 +1,8 @@
 package com.example.rek.minimalistfakeweatherapp.utils
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherEntity
+import java.lang.ref.WeakReference
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AdapterRecyclerCityList(private val context:Context, private val listener:ItemPressListener):
     RecyclerView.Adapter<AdapterRecyclerCityList.ViewHolder>() {
@@ -30,7 +35,6 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
         viewHolder.setViewData(data[position], position, listener)
     }
 
-
     fun setData(newData: ArrayList<WeatherEntity>) {
         data = newData
         notifyDataSetChanged()
@@ -44,12 +48,19 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
         private val imgIcon: ImageView = v.findViewById(R.id.imgItemIcon)
 
         fun setViewData(entity: WeatherEntity, position: Int, listener: ItemPressListener) {
+
             val nameRegion = entity.name.split(",")
             tvName.text = nameRegion[0]
             tvRegion.text = nameRegion[1].trim()
 
             val temp = "${entity.temp}\u00B0"
             tvTemp.text = temp
+
+            if (Utils.checkForNight()) {
+                tvName.setTextColor(ContextCompat.getColor(context, R.color.warm_grey) )
+                tvRegion.setTextColor(ContextCompat.getColor(context, R.color.warm_grey) )
+                tvTemp.setTextColor(ContextCompat.getColor(context, R.color.warm_grey) )
+            }
 
             val imgs = context.resources.obtainTypedArray(R.array.WeatherIcons)
             imgIcon.setImageResource( imgs.getResourceId(entity.weatherIconIndex, 0) )
@@ -60,7 +71,6 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
                 return@setOnLongClickListener true
             }
         }
-
     }
 
     /*
