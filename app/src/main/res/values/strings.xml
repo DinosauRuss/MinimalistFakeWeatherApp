@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MinimalistFakeWeatherApp</string>
 
-    <string name="FARENHEIGHT" translatable="false">F</string>
+    <string name="FAHRENHEIT" translatable="false">F</string>
     <string name="CELSIUS" translatable="false">C</string>
     <string name="PREF_NAMES" translatable="false">pref_names</string>
     <string name="PREF_UNITS" translatable="false">pref_units</string>
@@ -24,6 +24,9 @@
     <string name="toast_city_not_added">"Too many cities, %s not added"</string>
     <string name="toast_too_many_cities">Too many cities</string>
     <string name="bg_add_city">Add a city to\nview weather</string>
+    <string name="info">Info</string>
+
+
 
 </resources>
 

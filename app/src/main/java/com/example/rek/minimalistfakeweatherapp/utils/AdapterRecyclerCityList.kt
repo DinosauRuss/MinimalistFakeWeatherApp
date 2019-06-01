@@ -2,7 +2,6 @@ package com.example.rek.minimalistfakeweatherapp.utils
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherEntity
-import java.lang.ref.WeakReference
-import java.util.*
 import kotlin.collections.ArrayList
 
 class AdapterRecyclerCityList(private val context:Context, private val listener:ItemPressListener):
@@ -62,7 +59,7 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
                 tvTemp.setTextColor(ContextCompat.getColor(context, R.color.warm_grey) )
             }
 
-            val imgs = context.resources.obtainTypedArray(R.array.WeatherIcons)
+            val imgs = context.resources.obtainTypedArray(R.array.weather_icons)
             imgIcon.setImageResource( imgs.getResourceId(entity.weatherIconIndex, 0) )
             imgs.recycle()
 

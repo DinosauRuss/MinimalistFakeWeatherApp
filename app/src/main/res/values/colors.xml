@@ -14,6 +14,6 @@
     <color name="weather_cloudy_grey">#A89696</color>
     <color name="weather_sunny_orange">#FFC100</color>
     <color name="weather_partly_sunny_blue">#2282DB</color>
-    <color name="weather_rainy_purple">#852DD1</color>
+    <color name="weather_rainy_purple">#7A0CDA</color>
 
 </resources>

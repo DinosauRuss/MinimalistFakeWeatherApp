@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -22,10 +21,13 @@ import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefObject
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class MainActivity : AppCompatActivity() {
+
+    companion object {
+        private var currentTempUnit: String = ""
+    }
 
     private lateinit var vModelWeather: WeatherViewModel
     private lateinit var sharedPrefObject: SharedPrefObject
@@ -36,7 +38,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         initLayout()
 
-        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this)
         sharedPrefObject = SharedPrefObject(application)
         vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
         vModelWeather.getWeatherEntities().observe(this, Observer {
@@ -71,7 +72,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         viewPagerMain.adapter = vpAdapter
         tabLayout.setupWithViewPager(viewPagerMain)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -101,14 +101,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         return true
     }
 
-    override fun onStop() {
-        super.onStop()
-        sharedPrefObject.savePosition(viewPagerMain.currentItem)
-    }
-
     override fun onResume() {
         super.onResume()
 
+        // Change background as needed
         if (vpAdapter.count < 1) {
             tvNoCities.visibility = View.VISIBLE
             if (Utils.checkForNight()) {
@@ -122,14 +118,20 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         } else {
             tvNoCities.visibility = View.GONE
         }
-    }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        Log.d(Utils.TAG, "prefChange")
-        if (key.equals(getString(R.string.PREF_UNITS))) {
-            Log.d(Utils.TAG, "prefChange units")
+        // Change temperature units as needed
+        val defaultUnit = getString(R.string.FAHRENHEIT)
+        val resumeTempUnit = PreferenceManager.getDefaultSharedPreferences(this)
+            .getString( getString(R.string.PREF_UNITS), defaultUnit )
+        if (!resumeTempUnit!!.equals(currentTempUnit)) {
+            currentTempUnit = resumeTempUnit
             recreate()
         }
+    }
+
+    override fun onStop() {
+        sharedPrefObject.savePosition(viewPagerMain.currentItem)
+        super.onStop()
     }
 
     override fun onBackPressed() {

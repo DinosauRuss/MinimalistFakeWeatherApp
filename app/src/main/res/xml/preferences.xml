@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
+    <ListPreference
         android:key="@string/PREF_UNITS"
-        android:title="Use \u00B0 F as temperature units"
-        android:defaultValue="true"/>
+        android:title="Degree Units"
+        android:dialogTitle="Select Units of Temperature"
+        android:entries="@array/temp_unit_settings_entries"
+        android:entryValues="@array/temp_unit_settings_values" />
 
     <Preference
-        android:title="Info"
+        android:title="@string/info"
         android:summary="Cities database provided by ..."/>
 
-</PreferenceScreen>
+</android.support.v7.preference.PreferenceScreen>
 
