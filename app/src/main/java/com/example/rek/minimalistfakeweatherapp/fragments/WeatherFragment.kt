@@ -3,6 +3,8 @@ package com.example.rek.minimalistfakeweatherapp.fragments
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +58,8 @@ class WeatherFragment : Fragment() {
             val weatherEntity = Gson().fromJson<WeatherEntity>(
                 args.getString(JSON_ENTITY), WeatherEntityFake::class.java)
 
+            setBgColor(weatherEntity)
+
             // Primary day data
             bindPrimaryData(weatherEntity, unitFbool)
 
@@ -65,6 +69,12 @@ class WeatherFragment : Fragment() {
             bindFutureData(futureViewPlusThree, weatherEntity.futureDayThree, unitFbool)
             bindFutureData(futureViewPlusFour, weatherEntity.futureDayFour, unitFbool)
         }
+    }
+
+    private fun setBgColor(entity: WeatherEntity) {
+        val colors = resources.obtainTypedArray(R.array.WeatherColors)
+        fragContainerWeather.setBackgroundColor( colors.getColor(entity.weatherIconIndex, colors.length()-1) )
+        colors.recycle()
     }
 
     private fun bindPrimaryData(entity: WeatherEntity, unitFbool: Boolean) {

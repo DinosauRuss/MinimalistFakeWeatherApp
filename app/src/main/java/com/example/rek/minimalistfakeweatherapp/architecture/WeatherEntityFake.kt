@@ -17,7 +17,7 @@ class WeatherEntityFake(override val name: String): WeatherEntity() {
 
 
     class FutureDayWeatherFake(override val daysAhead: Int, temp: Int): WeatherFutureDay() {
-        override val iconIndex = (0..3).random()
+        override val iconIndex = (0 until Utils.numOfIcons).random()
         override val tempHi: Int = Utils.constrain( ((temp-10)..(temp+10)).random() )
         override val tempLo: Int = Utils.constrain( ((tempHi-20)..(tempHi-10)).random() )
     }

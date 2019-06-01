@@ -3,22 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
+        android:id="@+id/tvFutureDay"
+        style="@style/FutureWeatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvFutureDay"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal" />
 
     <ImageView
+        android:id="@+id/imgFutureWeatherIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imgFutureWeatherIcon"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal" />
 
     <TextView
+        android:id="@+id/tvFutureTemps"
+        style="@style/FutureWeatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvFutureTemps"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal" />
 
 </merge>
 

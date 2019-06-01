@@ -56,6 +56,7 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
             tvNoCitiesList.setTextColor(ContextCompat.getColor(this, R.color.warm_grey))
         } else {
             citiesListContainer.background = null
+            citiesListContainer.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBgDefault))
             tvNoCitiesList.setTextColor(ContextCompat.getColor(this, android.R.color.black))
         }
     }

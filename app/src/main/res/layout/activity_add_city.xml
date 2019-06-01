@@ -5,6 +5,7 @@
     android:id="@+id/bgAddActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBgDefault"
     tools:context=".activities.AddCityActivity">
 
     <android.support.v7.widget.Toolbar

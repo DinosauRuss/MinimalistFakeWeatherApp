@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.ContextCompat.startActivity
 import android.util.Log
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         initLayout()
 
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this)
         sharedPrefObject = SharedPrefObject(application)
         vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
         vModelWeather.getWeatherEntities().observe(this, Observer {
@@ -63,7 +65,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     private fun initLayout() {
-
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbarMain)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -115,6 +116,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 tvNoCities.setTextColor(ContextCompat.getColor(this, R.color.warm_grey))
             } else {
                 bgMainActivity.background = null
+                bgMainActivity.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBgDefault))
                 tvNoCities.setTextColor(ContextCompat.getColor(this, android.R.color.black))
             }
         } else {
@@ -123,7 +125,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        Log.d(Utils.TAG, "prefChange")
         if (key.equals(getString(R.string.PREF_UNITS))) {
+            Log.d(Utils.TAG, "prefChange units")
             recreate()
         }
     }

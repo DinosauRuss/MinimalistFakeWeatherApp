@@ -2,6 +2,7 @@ package com.example.rek.minimalistfakeweatherapp.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -14,6 +15,7 @@ import com.example.rek.minimalistfakeweatherapp.db.CityViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterAutoCompleteTextView
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_add_city.*
+import kotlinx.android.synthetic.main.activity_add_city.view.*
 
 class AddCityActivity : AppCompatActivity() {
 
@@ -48,7 +50,6 @@ class AddCityActivity : AppCompatActivity() {
                 actvCities.showDropDown()
             }
         })
-
     }
 
     override fun onResume() {
@@ -58,6 +59,7 @@ class AddCityActivity : AppCompatActivity() {
             bgAddActivity.background = ContextCompat.getDrawable(this, R.drawable.bg_night)
         } else {
             bgAddActivity.background = null
+            bgAddActivity.setBackgroundColor(ContextCompat.getColor(this, R.color.colorBgDefault))
         }
     }
 

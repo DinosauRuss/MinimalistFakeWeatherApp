@@ -10,7 +10,8 @@
         <item name="android:actionMenuTextColor">@android:color/white</item>
         <item name="actionMenuTextColor">@android:color/white</item>
 
-        <item name="android:colorBackground">@color/colorBgDefault</item>
+        <item name="homeAsUpIndicator">@drawable/ic_arrow_back_white</item>
+
     </style>
 
     <style name="imgWeatherIcon" parent="AppTheme">
@@ -32,6 +33,11 @@
 
     <style name="ListItemText" parent="AppTheme">
         <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="FutureWeatherText" parent="AppTheme">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
 </resources>

@@ -8,4 +8,12 @@
         <item>@drawable/weather_rain_temp</item>
     </integer-array>
 
+    <integer-array name="WeatherColors">
+        <item>@color/weather_sunny_orange</item>
+        <item>@color/weather_cloudy_grey</item>
+        <item>@color/weather_partly_sunny_blue</item>
+        <item>@color/weather_rainy_purple</item>
+        <item>@color/colorBgDefault</item>
+    </integer-array>
+
 </resources>

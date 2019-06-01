@@ -7,7 +7,7 @@
         android:height="100dp" />
 
     <gradient
-        android:startColor="@color/blue_midnight"
+        android:startColor="@color/weather_midnight_blue"
         android:endColor="@color/blue_night"
         android:angle="90"/>
 
