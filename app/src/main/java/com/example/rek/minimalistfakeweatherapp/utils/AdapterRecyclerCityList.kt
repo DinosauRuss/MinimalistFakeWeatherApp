@@ -1,6 +1,7 @@
 package com.example.rek.minimalistfakeweatherapp.utils
 
 import android.content.Context
+import android.content.res.Resources
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherEntity
+import java.lang.ref.WeakReference
 import kotlin.collections.ArrayList
 
 class AdapterRecyclerCityList(private val context:Context, private val listener:ItemPressListener):
@@ -68,6 +70,9 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
                 return@setOnLongClickListener true
             }
         }
+
+
+
     }
 
     /*

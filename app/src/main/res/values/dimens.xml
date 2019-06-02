@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="weather_image_width">125dp</dimen>
-    <dimen name="weather_image_height">125dp</dimen>
+    <dimen name="weather_image_height">175dp</dimen>
 
     <dimen name="city_name_text_size">34sp</dimen>
     <dimen name="city_temp_text_size">64sp</dimen>

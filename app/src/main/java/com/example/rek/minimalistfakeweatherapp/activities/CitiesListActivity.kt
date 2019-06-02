@@ -47,10 +47,10 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
     override fun onResume() {
         super.onResume()
 
+        // Set background as needed
         if (vModelWeather.getNumOfCities() < 1) {
             tvNoCitiesList.visibility = View.VISIBLE
         }
-
         if (Utils.checkForNight()) {
             citiesListContainer.background = ContextCompat.getDrawable(this, R.drawable.bg_night)
             tvNoCitiesList.setTextColor(ContextCompat.getColor(this, R.color.warm_grey))
@@ -95,6 +95,9 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
         rvCityList.layoutManager = LinearLayoutManager(this)
         rvAdapter = AdapterRecyclerCityList(this, this)
         rvCityList.adapter = rvAdapter
+
+
+
     }
 
     override fun onItemLongPress(position: Int) {

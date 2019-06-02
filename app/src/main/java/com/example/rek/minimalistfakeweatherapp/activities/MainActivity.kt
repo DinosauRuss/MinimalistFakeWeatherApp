@@ -3,7 +3,6 @@ package com.example.rek.minimalistfakeweatherapp.activities
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -27,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private var currentTempUnit: String = ""
+        private var alreadyExists: Boolean = false
     }
 
     private lateinit var vModelWeather: WeatherViewModel
@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         // Load data on first run
-        if (savedInstanceState == null) {
+//        if (savedInstanceState == null) {
+        if (!alreadyExists) {
             // Load cities from SharedPreferences
             val namesStr = sharedPrefObject.getCitiesSharedPref()
             if (namesStr != "") {
@@ -58,10 +59,7 @@ class MainActivity : AppCompatActivity() {
                     vModelWeather.addCity(name)
                 }
             }
-            // Reset ViewPager to previous page
-            val prevPos = sharedPrefObject.getPosition()
-            // Needs to be in Handler to allow ViewPager time to fully populate
-            Handler().post { viewPagerMain.currentItem = prevPos }
+            alreadyExists = true
         }
     }
 
@@ -127,21 +125,33 @@ class MainActivity : AppCompatActivity() {
             currentTempUnit = resumeTempUnit
             recreate()
         }
+
+        // Reset ViewPager to previous page
+        val prevPos = sharedPrefObject.getPosition()
+        // Needs to be in Handler to allow ViewPager time to fully populate
+        Handler().post { viewPagerMain.currentItem = prevPos }
+
     }
 
     override fun onStop() {
+        Log.d(Utils.TAG, "onStop")
         sharedPrefObject.savePosition(viewPagerMain.currentItem)
         super.onStop()
     }
 
-    override fun onBackPressed() {
-        if (viewPagerMain.currentItem == 0) {
-            // Minimize app but do not destroy activity, retain created data
-            moveTaskToBack(true)
-        } else {
-            viewPagerMain.currentItem -= 1
-        }
+    override fun onDestroy() {
+        Log.d(Utils.TAG, "onDestroy")
+        super.onDestroy()
     }
+
+//    override fun onBackPressed() {
+//        if (viewPagerMain.currentItem == 0) {
+//            // Minimize app but do not destroy activity, retain created data
+//            moveTaskToBack(true)
+//        } else {
+//            viewPagerMain.currentItem -= 1
+//        }
+//    }
 
 }
 
