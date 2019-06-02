@@ -134,15 +134,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStop() {
-        Log.d(Utils.TAG, "onStop")
         sharedPrefObject.savePosition(viewPagerMain.currentItem)
         super.onStop()
     }
 
-    override fun onDestroy() {
-        Log.d(Utils.TAG, "onDestroy")
-        super.onDestroy()
-    }
 
 //    override fun onBackPressed() {
 //        if (viewPagerMain.currentItem == 0) {

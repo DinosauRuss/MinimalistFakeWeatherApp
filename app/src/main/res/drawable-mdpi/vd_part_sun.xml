@@ -1,0 +1,32 @@
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
+    android:width="71dp"
+    android:height="55dp"
+    android:viewportWidth="71"
+    android:viewportHeight="55">
+    <group android:name="group_1">
+        <path
+            android:name="cloud"
+            android:pathData="M 13.876 23.76 C 10.655 24.477 7.77 26.298 5.702 28.922 C 3.633 31.546 2.505 34.816 2.505 38.185 C 2.505 41.875 3.858 45.434 6.296 48.155 C 8.734 50.876 12.084 52.566 15.678 52.89 L 39.546 52.866 C 40.004 52.924 40.465 52.952 40.928 52.952 C 42.938 52.952 44.913 52.411 46.654 51.383 C 48.396 50.355 49.842 48.877 50.847 47.097 C 51.853 45.316 52.382 43.297 52.382 41.242 C 52.382 38.583 51.496 36.002 49.872 33.926 C 48.248 31.85 45.979 30.4 43.442 29.817 C 42.716 26.022 40.721 22.605 37.801 20.15 C 34.882 17.695 31.218 16.352 27.437 16.352 C 24.756 16.352 22.114 17.028 19.749 18.32 C 17.384 19.613 15.366 21.481 13.876 23.76"
+            android:fillAlpha="0"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"/>
+        <path
+            android:name="sun"
+            android:pathData="M 35.058 16.548 C 37.747 14.031 41.295 12.629 44.978 12.629 C 47.526 12.629 50.03 13.3 52.237 14.574 C 54.443 15.848 56.276 17.681 57.55 19.887 C 58.824 22.094 59.495 24.597 59.495 27.145 C 59.495 29.673 58.834 32.158 57.579 34.352 C 56.324 36.547 54.517 38.376 52.338 39.657"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="3"
+            android:strokeLineCap="round"/>
+        <group android:name="group_rays">
+            <path
+                android:name="rays"
+                android:pathData="M 44.325 7.403 L 43.883 2.439 M 55.894 10.45 L 58.454 6.174 M 63.462 19.715 L 68.047 17.761 M 64.14 31.659 L 68.998 32.773 M 33.175 11.739 L 29.899 7.982 M 57.667 41.721 L 60.943 45.477"
+                android:fillAlpha="0"
+                android:strokeColor="#FFFFFF"
+                android:strokeWidth="3"
+                android:strokeLineCap="round"/>
+        </group>
+    </group>
+</vector>

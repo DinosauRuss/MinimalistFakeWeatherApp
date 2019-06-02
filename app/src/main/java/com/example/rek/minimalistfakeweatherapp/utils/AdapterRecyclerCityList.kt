@@ -61,11 +61,11 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
                 tvTemp.setTextColor(ContextCompat.getColor(context, R.color.warm_grey) )
             }
 
-            val imgs = context.resources.obtainTypedArray(R.array.weather_icons)
+            val imgs = context.resources.obtainTypedArray(R.array.vd_weather_icons)
             imgIcon.setImageResource( imgs.getResourceId(entity.weatherIconIndex, 0) )
             imgs.recycle()
 
-            v.setOnLongClickListener {v ->
+            v.setOnLongClickListener {
                 listener.onItemLongPress(position)
                 return@setOnLongClickListener true
             }

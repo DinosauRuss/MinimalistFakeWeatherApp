@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <integer-array name="weather_icons">
-        <item>@drawable/weather_sun_temp</item>
-        <item>@drawable/weather_cloud_temp</item>
-        <item>@drawable/weather_part_sun_temp</item>
-        <item>@drawable/weather_rain_temp</item>
+    <integer-array name="avd_weather_icons">
+        <item>@drawable/avd_sunny</item>
+        <item>@drawable/avd_cloudy</item>
+        <item>@drawable/avd_part_sun</item>
+        <item>@drawable/avd_rain</item>
+    </integer-array>
+
+    <integer-array name="vd_weather_icons">
+        <item>@drawable/vd_sun</item>
+        <item>@drawable/vd_cloudy</item>
+        <item>@drawable/vd_part_sun</item>
+        <item>@drawable/vd_rain</item>
     </integer-array>
 
     <integer-array name="weather_colors">

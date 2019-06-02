@@ -2,6 +2,10 @@
 <resources>
     <dimen name="weather_image_width">125dp</dimen>
     <dimen name="weather_image_height">175dp</dimen>
+    <dimen name="weather_image_land_width">100dp</dimen>
+    <dimen name="weather_image_land_height">100dp</dimen>
+    <dimen name="weather_image_future_width">35dp</dimen>
+    <dimen name="weather_image_future_height">35dp</dimen>
 
     <dimen name="city_name_text_size">34sp</dimen>
     <dimen name="city_temp_text_size">64sp</dimen>

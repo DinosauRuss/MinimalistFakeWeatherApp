@@ -2,7 +2,9 @@ package com.example.rek.minimalistfakeweatherapp.fragments
 
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +21,10 @@ import java.util.*
 
 
 class WeatherFragment : Fragment() {
+
+    private var created: Boolean = false
+    private var visible: Boolean = false
+    private var weatherIconIndex: Int = 0
 
     companion object {
         private const val JSON_ENTITY = "json_entity"
@@ -55,6 +61,8 @@ class WeatherFragment : Fragment() {
                 args.getString(JSON_ENTITY), WeatherEntityFake::class.java)
             setBgColor(weatherEntity)
 
+            this.weatherIconIndex = weatherEntity.weatherIconIndex
+
             val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
             val defaultUnit = getString(R.string.FAHRENHEIT)
             val tempUnit = prefs.getString(getString(R.string.PREF_UNITS), defaultUnit) ?: defaultUnit
@@ -67,6 +75,9 @@ class WeatherFragment : Fragment() {
             bindFutureData(futureViewPlusTwo, weatherEntity.futureDayTwo, tempUnit)
             bindFutureData(futureViewPlusThree, weatherEntity.futureDayThree, tempUnit)
             bindFutureData(futureViewPlusFour, weatherEntity.futureDayFour, tempUnit)
+
+            created = true
+            checkSafeToAnimate()
         }
     }
 
@@ -87,14 +98,14 @@ class WeatherFragment : Fragment() {
         }
         tvDegreeSymbol.text = tempUnit
 
-        val imgs = resources.obtainTypedArray(R.array.weather_icons)
+        val imgs = resources.obtainTypedArray(R.array.avd_weather_icons)
         imgCityWeather.setImageResource(imgs.getResourceId(entity.weatherIconIndex, -1))
         imgs.recycle()
     }
 
     private fun bindFutureData(view: ViewFutureWeather, entity: WeatherFutureDay, tempUnit: String) {
         val todayInt = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        val imgs = resources.obtainTypedArray(R.array.weather_icons)
+        val imgs = resources.obtainTypedArray(R.array.vd_weather_icons)
 
         view.tvFutureDay.text = Utils.dayTextFromInt( (todayInt + entity.daysAhead) )
         view.imgFutureWeatherIcon.setImageResource(imgs.getResourceId(entity.iconIndex, -1))
@@ -107,6 +118,44 @@ class WeatherFragment : Fragment() {
             "${Utils.convertFtoC(entity.tempHi)}/${Utils.convertFtoC(entity.tempLo)}"
         }
         view.tvFutureTemps.text = futureTemps
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+
+        if (isVisibleToUser) {
+            visible = true
+            checkSafeToAnimate()
+        } else {
+            visible = false
+            if (created) {
+                val d = getCorrectDrawableId()
+                imgCityWeather.setImageResource(d)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        created = false
+        super.onDestroyView()
+    }
+
+    private fun checkSafeToAnimate() {
+        if (visible && created) {
+            val drawable = imgCityWeather.drawable
+            if (drawable is AnimatedVectorDrawableCompat) {
+                drawable.start()
+
+            }
+        }
+    }
+
+    private fun getCorrectDrawableId(): Int {
+        val avdArray = resources.obtainTypedArray(R.array.avd_weather_icons)
+        val drawable = avdArray.getResourceId(weatherIconIndex, -1)
+        avdArray.recycle()
+
+        return drawable
     }
 
 }

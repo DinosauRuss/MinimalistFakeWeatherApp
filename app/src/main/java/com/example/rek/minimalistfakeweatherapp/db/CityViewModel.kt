@@ -4,7 +4,9 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherRepository
+import com.example.rek.minimalistfakeweatherapp.utils.Utils
 
 class CityViewModel(application: Application): AndroidViewModel(application) {
 

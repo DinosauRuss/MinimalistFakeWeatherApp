@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/imgFutureWeatherIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/weather_image_future_width"
+        android:layout_height="@dimen/weather_image_future_height"
         android:layout_gravity="center_horizontal" />
 
     <TextView

@@ -18,7 +18,7 @@
 
     <com.example.rek.minimalistfakeweatherapp.views.AutoCompleteCustom
         android:id="@+id/actvCities"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="36sp"
         android:layout_margin="56dp"
         android:background="@color/white"
