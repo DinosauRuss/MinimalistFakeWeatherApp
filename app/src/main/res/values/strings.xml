@@ -8,7 +8,6 @@
     <string name="PREF_POSITION" translatable="false">pref_position</string>
     <string name="SHARED_PREFERENCES" translatable="false">com.example.rek.minimalistfakeweatherapp_preferences</string>
 
-
     <string name="cities">cities</string>
     <string name="add">add</string>
     <string name="settings">settings</string>

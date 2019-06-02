@@ -37,7 +37,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvItemTemp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/vd_sun" />
+        tools:src="@drawable/vd_sun"
+        android:tint="@android:color/black"/>
 
     <TextView
         android:id="@+id/tvItemTemp"

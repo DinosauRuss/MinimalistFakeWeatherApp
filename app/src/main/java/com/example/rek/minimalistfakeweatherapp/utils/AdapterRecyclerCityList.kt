@@ -2,6 +2,7 @@ package com.example.rek.minimalistfakeweatherapp.utils
 
 import android.content.Context
 import android.content.res.Resources
+import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -52,8 +53,17 @@ class AdapterRecyclerCityList(private val context:Context, private val listener:
             tvName.text = nameRegion[0]
             tvRegion.text = nameRegion[1].trim()
 
-            val temp = "${entity.temp}\u00B0"
-            tvTemp.text = temp
+            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+            val tempKey = context.getString(R.string.PREF_UNITS)
+            val defaultUnit = context.getString(R.string.FAHRENHEIT)
+            if (prefs.getString(tempKey, defaultUnit) == defaultUnit) {
+                val text = "${entity.temp}\u00B0"
+                tvTemp.text = text
+            } else {
+                val text = "${Utils.convertFtoC(entity.temp)}\u00B0"
+                tvTemp.text = text
+            }
+
 
             if (Utils.checkForNight()) {
                 tvName.setTextColor(ContextCompat.getColor(context, R.color.warm_grey) )
