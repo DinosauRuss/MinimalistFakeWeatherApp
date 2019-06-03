@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            tools:text="65\u00B0" />
+            tools:text="59\u00B0"/>
 
         <TextView
             android:id="@+id/tvDegreeSymbol"

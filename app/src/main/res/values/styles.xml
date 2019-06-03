@@ -12,6 +12,8 @@
 
         <item name="homeAsUpIndicator">@drawable/ic_arrow_back_white</item>
 
+        <item name="android:fontFamily">@font/comfortaa_bold</item>
+
     </style>
 
     <style name="imgWeatherIcon" parent="AppTheme">

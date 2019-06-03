@@ -3,10 +3,11 @@ package com.example.rek.minimalistfakeweatherapp.views
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.support.v4.app.FragmentActivity
+import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
-import android.view.View
 import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
+import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.db.CityViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.TypingDetector
 
@@ -23,6 +24,7 @@ class AutoCompleteCustom: AutoCompleteTextView {
         this.onItemClickListener = itemListener
 
         this.addTextChangedListener(typo)
+        this.typeface = ResourcesCompat.getFont(context, R.font.comfortaa_regular)
     }
 
 
