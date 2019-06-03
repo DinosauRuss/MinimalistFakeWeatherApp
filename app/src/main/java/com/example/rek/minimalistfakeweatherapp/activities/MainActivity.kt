@@ -20,6 +20,7 @@ import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefObject
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Thread.sleep
 
 
 class MainActivity : AppCompatActivity() {
@@ -119,6 +120,14 @@ class MainActivity : AppCompatActivity() {
             tvNoCities.visibility = View.GONE
         }
 
+        // Reset ViewPager to previous page
+        val prevPos = sharedPrefObject.getPosition()
+        Log.d(Utils.TAG, "$prevPos")
+        // Needs to be in Handler to allow ViewPager time to fully populate
+        Handler().post {
+//            sleep(100)
+            viewPagerMain.currentItem = prevPos }
+
         // Change temperature units as needed
         val defaultUnit = getString(R.string.FAHRENHEIT)
         val resumeTempUnit = PreferenceManager.getDefaultSharedPreferences(this)
@@ -127,11 +136,6 @@ class MainActivity : AppCompatActivity() {
             currentTempUnit = resumeTempUnit
             recreate()
         }
-
-        // Reset ViewPager to previous page
-        val prevPos = sharedPrefObject.getPosition()
-        // Needs to be in Handler to allow ViewPager time to fully populate
-        Handler().post { viewPagerMain.currentItem = prevPos }
 
     }
 
