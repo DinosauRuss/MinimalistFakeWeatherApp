@@ -34,11 +34,11 @@
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:layout_marginEnd="16dp"
+        android:tint="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvItemTemp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/vd_sun"
-        android:tint="@android:color/black"/>
+        tools:src="@drawable/vd_sun" />
 
     <TextView
         android:id="@+id/tvItemTemp"

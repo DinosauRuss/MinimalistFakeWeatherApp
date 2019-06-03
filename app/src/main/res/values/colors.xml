@@ -9,6 +9,8 @@
     <color name="colorBgDefault">@android:color/darker_gray</color>
     <color name="white">@android:color/white</color>
     <color name="warm_grey">#CABDBD</color>
+    <color name="dark_grey">#7A6C6C</color>
+    <color name="very_dark_grey">#413939</color>
     <color name="blue_night">#212192</color>
     <color name="weather_midnight_blue">#070768</color>
     <color name="weather_cloudy_grey">#A89696</color>
