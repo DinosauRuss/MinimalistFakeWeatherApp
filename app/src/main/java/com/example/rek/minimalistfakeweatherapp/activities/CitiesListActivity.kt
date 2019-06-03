@@ -34,7 +34,7 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
 
         vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
         vModelWeather.getWeatherEntities().observe(this, Observer {
-            if (it != null ) rvAdapter.setData(it)
+            if (it != null) rvAdapter.setData(it)
         })
     }
 
@@ -80,12 +80,17 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
                 }
                 val intento = Intent(this, AddCityActivity::class.java)
                 startActivity(intento)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
             R.id.menuSettings -> {
                 val intento = Intent(this, SettingsActivity::class.java)
                 startActivity(intento)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
-            android.R.id.home -> onBackPressed()    // Up/back button on toolbar
+            android.R.id.home -> {  // Up/back button on toolbar
+                onBackPressed()
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            }
         }
         return true
     }
@@ -119,8 +124,12 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
 
         val alert = buildo.create()
         alert.show()
-        }
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
 }
 
 

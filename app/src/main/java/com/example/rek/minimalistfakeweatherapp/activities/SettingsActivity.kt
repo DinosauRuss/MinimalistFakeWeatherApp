@@ -23,4 +23,9 @@ class SettingsActivity : AppCompatActivity() {
         }
         return true
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
 }

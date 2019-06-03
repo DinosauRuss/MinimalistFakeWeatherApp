@@ -65,9 +65,17 @@ class AddCityActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            android.R.id.home -> onBackPressed()
+            android.R.id.home -> {
+                onBackPressed()
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            }
         }
         return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
     private fun btnAddCallback() {

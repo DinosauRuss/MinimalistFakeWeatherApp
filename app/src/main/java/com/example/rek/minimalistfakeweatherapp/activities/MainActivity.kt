@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menuCities -> {
                 val intento = Intent(this, CitiesListActivity::class.java)
                 startActivity(intento)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
             R.id.menuAdd -> {
                 if (vModelWeather.getNumOfCities() >= Utils.maxCities) {
@@ -89,10 +90,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 val intento = Intent(this, AddCityActivity::class.java)
                 startActivity(intento)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
             R.id.menuSettings -> {
                 val intento = Intent(this, SettingsActivity::class.java)
                 startActivity(intento)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
         }
         return true
