@@ -5,19 +5,19 @@
     <item
         android:id="@+id/menuCities"
         android:orderInCategory="1"
-        android:title="@string/cities"
+        android:title="@string/menu_cities"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuAdd"
         android:orderInCategory="2"
-        android:title="@string/add"
+        android:title="@string/menu_add"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/menuSettings"
         android:orderInCategory="3"
-        android:title="@string/settings"
+        android:title="@string/menu_settings"
         app:showAsAction="ifRoom" />
 
 </menu>

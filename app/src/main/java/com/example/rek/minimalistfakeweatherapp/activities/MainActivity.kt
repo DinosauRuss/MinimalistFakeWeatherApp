@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         })
 
         // Load data on first run
-//        if (savedInstanceState == null) {
         if (!alreadyExists) {
             // Load cities from SharedPreferences
             val namesStr = sharedPrefObject.getCitiesSharedPref()

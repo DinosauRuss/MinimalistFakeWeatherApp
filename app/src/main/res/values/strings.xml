@@ -8,24 +8,28 @@
     <string name="PREF_POSITION" translatable="false">pref_position</string>
     <string name="SHARED_PREFERENCES" translatable="false">com.example.rek.minimalistfakeweatherapp_preferences</string>
 
-    <string name="cities">cities</string>
-    <string name="add">add</string>
-    <string name="settings">settings</string>
+    <string name="menu_cities">Cities</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_settings">Settings</string>
+    <string name="bg_add_city">Add a city to\nview weather</string>
+    <string name="hint_city_name">City Name</string>
+
     <string name="alert_dialog_remove_title">Delete City?</string>
     <string name="alert_dialog_remove_question">Delete %s?</string>
     <string name="alert_dialog_confirm">Confirm</string>
     <string name="alert_dialog_cancel">Cancel</string>
-    <string name="hint_city_name">City Name</string>
+
     <string name="toast_already_registered">%s already registered</string>
     <string name="toast_unknown_city">Unknown city</string>
     <string name="toast_city_deleted">%s has been deleted</string>
     <string name="toast_added">Added %s</string>
     <string name="toast_city_not_added">"Too many cities, %s not added"</string>
     <string name="toast_too_many_cities">Too many cities</string>
-    <string name="bg_add_city">Add a city to\nview weather</string>
-    <string name="info">Info</string>
 
-
+    <string name="pref_units_title">Degree Units</string>
+    <string name="pref_units_dialog_title">Select Units of Temperature</string>
+    <string name="pref_info_title">Info</string>
+    <string name="pref_info_summary">Cities database provided by: \nhttps://simplemaps.com/data/us-zips</string>
 
 </resources>
 

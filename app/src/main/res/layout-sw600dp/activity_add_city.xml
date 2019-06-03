@@ -42,7 +42,7 @@
             android:layout_width="125dp"
             android:layout_height="50dp"
             android:layout_marginTop="56dp"
-            android:text="@string/add"
+            android:text="@string/menu_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/actvCities"

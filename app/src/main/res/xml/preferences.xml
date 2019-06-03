@@ -3,14 +3,14 @@
 
     <ListPreference
         android:key="@string/PREF_UNITS"
-        android:title="Degree Units"
-        android:dialogTitle="Select Units of Temperature"
+        android:title="@string/pref_units_title"
+        android:dialogTitle="@string/pref_units_dialog_title"
         android:entries="@array/temp_unit_settings_entries"
         android:entryValues="@array/temp_unit_settings_values" />
 
     <Preference
-        android:title="@string/info"
-        android:summary="Cities database provided by ..."/>
+        android:title="@string/pref_info_title"
+        android:summary="@string/pref_info_summary" />
 
 </android.support.v7.preference.PreferenceScreen>
 

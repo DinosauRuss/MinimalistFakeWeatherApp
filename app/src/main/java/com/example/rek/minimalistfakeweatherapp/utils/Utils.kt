@@ -11,8 +11,6 @@ class Utils {
         const val minTemp = 20
         const val maxTemp = 99
         const val maxCities = 9
-        const val nightHour = 19
-        const val morningHour = 5
 
         fun constrain(num:Int, min:Int=(minTemp-10), max:Int=(maxTemp+10)): Int {
             return Math.max( (Math.min(num, max)), min )
@@ -28,7 +26,21 @@ class Utils {
         }
 
         fun checkForNight(): Boolean {
-            val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+            val nightHour: Int
+            val morningHour: Int
+
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val month = calendar.get(Calendar.MONTH)
+
+            if (month in (4..9)) {
+                nightHour = 20
+                morningHour = 5
+            } else {
+                nightHour = 18
+                morningHour = 6
+            }
+
             return (hour !in (morningHour until nightHour))
         }
     }

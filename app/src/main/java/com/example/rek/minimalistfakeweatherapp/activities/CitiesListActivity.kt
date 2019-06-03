@@ -95,9 +95,6 @@ class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPres
         rvCityList.layoutManager = LinearLayoutManager(this)
         rvAdapter = AdapterRecyclerCityList(this, this)
         rvCityList.adapter = rvAdapter
-
-
-
     }
 
     override fun onItemLongPress(position: Int) {
