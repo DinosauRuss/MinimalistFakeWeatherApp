@@ -31,6 +31,11 @@
     <string name="pref_info_title">Info</string>
     <string name="pref_info_summary">Cities database provided by: \nhttps://simplemaps.com/data/us-zips</string>
 
+    <string name="sun_icon_desc">Sun</string>
+    <string name="cloud_icon_desc">Cloud</string>
+    <string name="part_sun_icon_desc">Part sunny</string>
+    <string name="rain_icon_desc">Rain</string>
+
 </resources>
 
 

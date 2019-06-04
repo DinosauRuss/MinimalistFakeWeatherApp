@@ -22,6 +22,13 @@
         <item>@color/weather_rainy_purple</item>
         <item>@color/colorBgDefault</item>
     </integer-array>
+
+    <string-array name="weather_icon_accessibility_desriptions">
+        <item>@string/sun_icon_desc</item>
+        <item>@string/cloud_icon_desc</item>
+        <item>@string/part_sun_icon_desc</item>
+        <item>@string/rain_icon_desc</item>
+    </string-array>
     
     <string-array name="temp_unit_settings_entries">
         <item>\u00B0F</item>

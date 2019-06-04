@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.graphics.drawable.AnimatedVectorDrawableCompat
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -99,17 +98,23 @@ class WeatherFragment : Fragment() {
         tvDegreeSymbol.text = tempUnit
 
         val imgs = resources.obtainTypedArray(R.array.avd_weather_icons)
+        val descriptions = resources.obtainTypedArray(R.array.weather_icon_accessibility_desriptions)
         imgCityWeather.setImageResource(imgs.getResourceId(entity.weatherIconIndex, -1))
+        imgCityWeather.contentDescription = descriptions.getString(weatherIconIndex)
         imgs.recycle()
+        descriptions.recycle()
     }
 
     private fun bindFutureData(view: ViewFutureWeather, entity: WeatherFutureDay, tempUnit: String) {
         val todayInt = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
         val imgs = resources.obtainTypedArray(R.array.vd_weather_icons)
+        val descriptions = resources.obtainTypedArray(R.array.weather_icon_accessibility_desriptions)
 
         view.tvFutureDay.text = Utils.dayTextFromInt( (todayInt + entity.daysAhead) )
         view.imgFutureWeatherIcon.setImageResource(imgs.getResourceId(entity.iconIndex, -1))
+        view.imgFutureWeatherIcon.contentDescription = descriptions.getString(entity.iconIndex)
         imgs.recycle()
+        descriptions.recycle()
 
         val unitF = getString(R.string.FAHRENHEIT)
         val futureTemps = if (tempUnit.equals(unitF)) {
