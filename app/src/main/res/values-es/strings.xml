@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="menu_cities">Ciudades</string>
+    <string name="menu_add">Añadir</string>
+    <string name="menu_settings">Ajustes</string>
+    <string name="bg_add_city">Añade una ciudad\npara ver el climar</string>
+    <string name="hint_city_name">Nombre de la ciudad</string>
+
+    <string name="alert_dialog_remove_title">Elimina ciudad?</string>
+    <string name="alert_dialog_remove_question">Elimina %s?</string>
+    <string name="alert_dialog_confirm">Confirmación</string>
+    <string name="alert_dialog_cancel">Cancelar</string>
+
+    <string name="toast_already_registered">%s ya registrado</string>
+    <string name="toast_unknown_city">Ciudad desconocida</string>
+    <string name="toast_city_deleted">%s ha sido eliminada</string>
+    <string name="toast_added">Añadido a %s</string>
+    <string name="toast_city_not_added">"Demasiados ciudades, %s no añadido"</string>
+    <string name="toast_too_many_cities">Demasiados ciudades</string>
+
+    <string name="pref_units_title">Unidades de temperatura</string>
+    <string name="pref_units_dialog_title">Seleccione unidades de temperatura</string>
+    <string name="pref_info_title">Información</string>
+    <string name="pref_info_summary">Lista de ciudades proporcionada por: \nhttps://simplemaps.com/data/us-zips</string>
+
+    <string name="sun_icon_desc">Sol</string>
+    <string name="cloud_icon_desc">Nubarrón</string>
+    <string name="part_sun_icon_desc">Parcialmente soleado</string>
+    <string name="rain_icon_desc">Lluvia</string>
+
+
+</resources>

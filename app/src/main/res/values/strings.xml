@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MinimalistFakeWeatherApp</string>
+    <string name="app_name" translatable="false">MinimalistFakeWeatherApp</string>
 
     <string name="FAHRENHEIT" translatable="false">F</string>
     <string name="CELSIUS" translatable="false">C</string>
