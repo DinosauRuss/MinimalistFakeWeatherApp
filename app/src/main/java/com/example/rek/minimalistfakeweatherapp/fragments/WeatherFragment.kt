@@ -59,7 +59,8 @@ class WeatherFragment : Fragment() {
         val args = arguments
         if (args != null) {
             val weatherEntity = Gson().fromJson<WeatherEntity>(
-                args.getString(JSON_ENTITY), WeatherEntityFake::class.java)
+                args.getString(JSON_ENTITY), WeatherEntityFake::class.java
+            )
             setBgColor(weatherEntity)
 
             this.weatherIconIndex = weatherEntity.weatherIconIndex
@@ -84,7 +85,7 @@ class WeatherFragment : Fragment() {
 
     private fun setBgColor(entity: WeatherEntity) {
         val colors = resources.obtainTypedArray(R.array.weather_colors)
-        fragContainerWeather.setBackgroundColor( colors.getColor(entity.weatherIconIndex, colors.length()-1) )
+        fragContainerWeather.setBackgroundColor(colors.getColor(entity.weatherIconIndex, colors.length() - 1))
         colors.recycle()
     }
 
@@ -101,7 +102,16 @@ class WeatherFragment : Fragment() {
 
         val imgs = resources.obtainTypedArray(R.array.avd_weather_icons)
         val descriptions = resources.obtainTypedArray(R.array.weather_icon_accessibility_desriptions)
-        imgCityWeather.setImageResource(imgs.getResourceId(entity.weatherIconIndex, -1))
+
+        if (this.activity != null) {
+            val avdId = imgs.getResourceId(weatherIconIndex, 0)
+            val avd = AnimatedVectorDrawableCompat.create(
+                activity!!.applicationContext, avdId
+            )
+            imgCityWeather.setImageDrawable(avd)
+        }
+
+//        imgCityWeather.setImageResource(imgs.getResourceId(entity.weatherIconIndex, -1))
         imgCityWeather.contentDescription = descriptions.getString(weatherIconIndex)
         imgs.recycle()
         descriptions.recycle()
@@ -112,7 +122,7 @@ class WeatherFragment : Fragment() {
         val imgs = resources.obtainTypedArray(R.array.vd_weather_icons)
         val descriptions = resources.obtainTypedArray(R.array.weather_icon_accessibility_desriptions)
 
-        view.tvFutureDay.text = Utils.dayTextFromInt( (todayInt + entity.daysAhead) )
+        view.tvFutureDay.text = Utils.dayTextFromInt((todayInt + entity.daysAhead))
         view.imgFutureWeatherIcon.setImageResource(imgs.getResourceId(entity.iconIndex, -1))
         view.imgFutureWeatherIcon.contentDescription = descriptions.getString(entity.iconIndex)
         imgs.recycle()
@@ -137,7 +147,13 @@ class WeatherFragment : Fragment() {
             visible = false
             if (created) {
                 val d = getCorrectDrawableId()
-                imgCityWeather.setImageResource(d)
+//                imgCityWeather.setImageResource(d)
+
+                if (this.activity != null) {
+                    val avd = AnimatedVectorDrawableCompat.create(
+                        activity!!.applicationContext, d)
+                    imgCityWeather.setImageDrawable(avd)
+                }
             }
         }
     }
@@ -149,10 +165,10 @@ class WeatherFragment : Fragment() {
 
     private fun checkSafeToAnimate() {
         if (visible && created) {
+
             val drawable = imgCityWeather.drawable
             if (drawable is AnimatedVectorDrawableCompat) {
                 drawable.start()
-
             }
         }
     }
