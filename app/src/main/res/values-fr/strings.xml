@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Météo Aléatoire</string>
 
     <string name="menu_cities">Villes</string>
     <string name="menu_add">Ajouter</string>
