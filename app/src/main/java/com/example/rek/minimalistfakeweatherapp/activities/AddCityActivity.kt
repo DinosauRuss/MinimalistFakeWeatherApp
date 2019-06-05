@@ -2,11 +2,12 @@ package com.example.rek.minimalistfakeweatherapp.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
 import com.example.rek.minimalistfakeweatherapp.R
 import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
@@ -14,8 +15,9 @@ import com.example.rek.minimalistfakeweatherapp.db.CityAccessObject
 import com.example.rek.minimalistfakeweatherapp.db.CityViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterAutoCompleteTextView
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
+import com.example.rek.minimalistfakeweatherapp.views.AutoCompleteCustom
 import kotlinx.android.synthetic.main.activity_add_city.*
-import kotlinx.android.synthetic.main.activity_add_city.view.*
+import kotlinx.android.synthetic.main.activity_add_views.*
 
 class AddCityActivity : AppCompatActivity() {
 
@@ -28,13 +30,16 @@ class AddCityActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_city)
 
+        val toolbarAdd = findViewById<Toolbar>(R.id.toolbarAdd)
         setSupportActionBar(toolbarAdd)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val adapto = AdapterAutoCompleteTextView(this, android.R.layout.select_dialog_item)
+//        val actvCities = findViewById<AutoCompleteCustom>(R.id.actvCities)
         actvCities.setAdapter(adapto)
 
+//        val btnAddCity = findViewById<Button>(R.id.btnAddCity)
         btnAddCity.setOnClickListener { btnAddCallback() }
 
         vModelWeather = ViewModelProviders.of(this).get(WeatherViewModel::class.java)

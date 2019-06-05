@@ -18,6 +18,7 @@ import com.example.rek.minimalistfakeweatherapp.architecture.WeatherViewModel
 import com.example.rek.minimalistfakeweatherapp.utils.AdapterRecyclerCityList
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_cities_list.*
+import kotlinx.android.synthetic.main.activity_cities_views.*
 import java.util.*
 
 class CitiesListActivity : AppCompatActivity(), AdapterRecyclerCityList.ItemPressListener {

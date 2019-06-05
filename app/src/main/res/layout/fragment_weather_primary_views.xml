@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tvCityName"
+        style="@style/CityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        tools:text="Philadelphia, Pennsylvania" />
+
+    <ImageView
+        android:id="@+id/imgCityWeather"
+        android:layout_width="@dimen/weather_image_width"
+        android:layout_height="@dimen/weather_image_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCityName"
+        tools:src="@drawable/vd_cloudy" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgCityWeather">
+
+        <TextView
+            android:id="@+id/tvCityTemp"
+            style="@style/CityTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            tools:text="59\u00B0" />
+
+        <TextView
+            android:id="@+id/tvDegreeSymbol"
+            style="@style/CityTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textSize="@dimen/degree_symbol_size"
+            tools:text="@string/FAHRENHEIT" />
+    </LinearLayout>
+
+</merge>

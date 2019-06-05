@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
-    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/citiesListContainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_layout_dimen"
@@ -14,39 +14,7 @@
         android:padding="12dp"
         tools:context=".activities.CitiesListActivity">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarList"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvCityList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:overScrollMode="never"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarList" />
-
-        <TextView
-            android:id="@+id/tvNoCitiesList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bg_add_city"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+        <include layout="@layout/activity_cities_views"/>
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

@@ -15,6 +15,8 @@ import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.example.rek.minimalistfakeweatherapp.views.ViewFutureWeather
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_weather.*
+import kotlinx.android.synthetic.main.fragment_weather_future_views.*
+import kotlinx.android.synthetic.main.fragment_weather_primary_views.*
 import kotlinx.android.synthetic.main.future_weather.view.*
 import java.util.*
 

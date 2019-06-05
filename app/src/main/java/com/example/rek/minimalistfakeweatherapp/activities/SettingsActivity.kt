@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.example.rek.minimalistfakeweatherapp.R
 import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_settings_views.*
 
 class SettingsActivity : AppCompatActivity() {
 

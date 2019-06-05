@@ -20,6 +20,7 @@ import com.example.rek.minimalistfakeweatherapp.utils.SharedPrefObject
 import com.example.rek.minimalistfakeweatherapp.utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_views.*
 import java.lang.Thread.sleep
 
 
@@ -55,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             if (namesStr != "") {
                 val namesArray = Gson().fromJson(namesStr, Array<String>::class.java).toSet()
                 for (name in namesArray) {
-                    Log.d(Utils.TAG, name)
                     vModelWeather.addCity(name)
                 }
             }
@@ -122,7 +122,6 @@ class MainActivity : AppCompatActivity() {
 
         // Reset ViewPager to previous page
         val prevPos = sharedPrefObject.getPosition()
-        Log.d(Utils.TAG, "$prevPos")
         // Needs to be in Handler to allow ViewPager time to fully populate
         Handler().post {
 //            sleep(100)

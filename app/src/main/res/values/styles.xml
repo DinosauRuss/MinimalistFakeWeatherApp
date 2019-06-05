@@ -16,23 +16,11 @@
 
     </style>
 
-    <style name="imgWeatherIcon" parent="AppTheme">
-        <item name="android:layout_width">@dimen/weather_image_width</item>
-        <item name="android:layout_height">@dimen/weather_image_height</item>
-    </style>
-    <style name="imgWeatherIconLand" parent="AppTheme">
-        <item name="android:layout_width">@dimen/weather_image_land_width</item>
-        <item name="android:layout_height">@dimen/weather_image_land_height</item>
-    </style>
-
     <style name="CityName" parent="AppTheme">
         <item name="android:textSize">@dimen/city_name_text_size</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:padding">16dp</item>
-    </style>
-    <style name="CityNameLand" parent="CityName">
-        <item name="android:padding">10dp</item>
     </style>
 
     <style name="CityTemp" parent="CityName">

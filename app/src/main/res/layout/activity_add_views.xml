@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarAdd"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.rek.minimalistfakeweatherapp.views.AutoCompleteCustom
+        android:id="@+id/actvCities"
+        android:layout_width="300dp"
+        android:layout_height="36sp"
+        android:layout_margin="56dp"
+        android:background="@color/white"
+        android:completionThreshold="3"
+        android:hint="@string/hint_city_name"
+        android:inputType="textCapWords"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".2" />
+
+    <Button
+        android:id="@+id/btnAddCity"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="56dp"
+        android:text="@string/menu_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actvCities"
+        android:background="@drawable/btn_add_selector"
+        android:textColor="@android:color/white"/>
+
+</merge>
