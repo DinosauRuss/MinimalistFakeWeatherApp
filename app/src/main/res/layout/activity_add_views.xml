@@ -10,7 +10,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.rek.minimalistfakeweatherapp.views.AutoCompleteCustom
+    <com.cloudland.rek.minimalistfakeweatherapp.views.AutoCompleteCustom
         android:id="@+id/actvCities"
         android:layout_width="300dp"
         android:layout_height="36sp"

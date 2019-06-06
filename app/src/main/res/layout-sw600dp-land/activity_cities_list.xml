@@ -12,7 +12,7 @@
         android:layout_gravity="center_horizontal"
         android:background="@color/colorBgDefault"
         android:padding="12dp"
-        tools:context=".activities.CitiesListActivity">
+        tools:context="com.cloudland.rek.minimalistfakeweatherapp.activities.CitiesListActivity">
 
         <include layout="@layout/activity_cities_views"/>
 

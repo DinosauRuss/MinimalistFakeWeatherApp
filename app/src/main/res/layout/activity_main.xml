@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBgDefault"
     android:orientation="vertical"
-    tools:context=".activities.MainActivity">
+    tools:context="com.cloudland.rek.minimalistfakeweatherapp.activities.MainActivity">
 
     <include layout="@layout/activity_main_views"/>
 
